@@ -1,0 +1,156 @@
+srun -N 4 -n 32 -c7 --gpus-per-task=1 --gpu-bind=closest python -u benchmark_all_gather.py
+PE 0: MPICH CH4 OFI detected 4 NICs/node on host frontier09309
+PE 0: MPICH CH4 OFI limiting NIC usage by setting of MPICH_OFI_NUM_NICS=[4]
+PE 0: MPICH CH4 OFI netmod using cxi provider (domain_name=cxi2, src_addr=0x28d12)
+PE 0: Selected traffic class: [TC_BEST_EFFORT, 512]
+PE 0: MPICH CH4 OFI CXI counters initialized
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier09309.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier09309.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier09309.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier09309.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier09309.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier09309.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier09309.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier09309.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier09309.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier09309.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier09309.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier09309.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier09309.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier09309.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier09309.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier09309.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier09309.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier09309.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier09309.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier09309.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier09309.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier09309.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:464] [c10d] The server socket cannot be initialized on [::]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier09309.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier09309.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier09309.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier09309.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier09309.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier09309.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier09309.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier09309.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier09309.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier09309.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+output size = 1 MB
+Method = nccl
+All-gather bus bw for 32 GPUs is 0.867 GBPS for message output size 1.049 MB
+time = 1.172 ms
+Method = mpi
+All-gather bus bw for 32 GPUs is 3.013 GBPS for message output size 1.049 MB
+time = 0.337 ms
+Method = hybrid
+All-gather bus bw for 32 GPUs is 1.996 GBPS for message output size 1.049 MB
+time = 0.509 ms
+===============================
+output size = 2 MB
+Method = nccl
+All-gather bus bw for 32 GPUs is 0.137 GBPS for message output size 2.097 MB
+time = 14.817 ms
+Method = mpi
+All-gather bus bw for 32 GPUs is 3.367 GBPS for message output size 2.097 MB
+time = 0.603 ms
+Method = hybrid
+All-gather bus bw for 32 GPUs is 5.857 GBPS for message output size 2.097 MB
+time = 0.347 ms
+===============================
+output size = 4 MB
+Method = nccl
+All-gather bus bw for 32 GPUs is 0.354 GBPS for message output size 4.194 MB
+time = 11.464 ms
+Method = mpi
+All-gather bus bw for 32 GPUs is 7.275 GBPS for message output size 4.194 MB
+time = 0.558 ms
+Method = hybrid
+All-gather bus bw for 32 GPUs is 9.962 GBPS for message output size 4.194 MB
+time = 0.408 ms
+===============================
+output size = 8 MB
+Method = nccl
+All-gather bus bw for 32 GPUs is 0.628 GBPS for message output size 8.389 MB
+time = 12.942 ms
+Method = mpi
+All-gather bus bw for 32 GPUs is 8.229 GBPS for message output size 8.389 MB
+time = 0.987 ms
+Method = hybrid
+All-gather bus bw for 32 GPUs is 20.562 GBPS for message output size 8.389 MB
+time = 0.395 ms
+===============================
+output size = 16 MB
+Method = nccl
+All-gather bus bw for 32 GPUs is 14.795 GBPS for message output size 16.777 MB
+time = 1.099 ms
+Method = mpi
+All-gather bus bw for 32 GPUs is 10.796 GBPS for message output size 16.777 MB
+time = 1.505 ms
+Method = hybrid
+All-gather bus bw for 32 GPUs is 31.745 GBPS for message output size 16.777 MB
+time = 0.512 ms
+===============================
+output size = 32 MB
+Method = nccl
+All-gather bus bw for 32 GPUs is 25.545 GBPS for message output size 33.554 MB
+time = 1.272 ms
+Method = mpi
+All-gather bus bw for 32 GPUs is 11.752 GBPS for message output size 33.554 MB
+time = 2.766 ms
+Method = hybrid
+All-gather bus bw for 32 GPUs is 40.908 GBPS for message output size 33.554 MB
+time = 0.795 ms
+===============================
+output size = 64 MB
+Method = nccl
+All-gather bus bw for 32 GPUs is 46.654 GBPS for message output size 67.109 MB
+time = 1.393 ms
+Method = mpi
+All-gather bus bw for 32 GPUs is 18.079 GBPS for message output size 67.109 MB
+time = 3.596 ms
+Method = hybrid
+All-gather bus bw for 32 GPUs is 48.303 GBPS for message output size 67.109 MB
+time = 1.346 ms
+===============================
+output size = 128 MB
+Method = nccl
+All-gather bus bw for 32 GPUs is 69.300 GBPS for message output size 134.218 MB
+time = 1.876 ms
+Method = mpi
+All-gather bus bw for 32 GPUs is 20.173 GBPS for message output size 134.218 MB
+time = 6.445 ms
+Method = hybrid
+All-gather bus bw for 32 GPUs is 52.195 GBPS for message output size 134.218 MB
+time = 2.491 ms
+===============================
+output size = 256 MB
+Method = nccl
+All-gather bus bw for 32 GPUs is 71.386 GBPS for message output size 268.435 MB
+time = 3.643 ms
+Method = mpi
+All-gather bus bw for 32 GPUs is 21.018 GBPS for message output size 268.435 MB
+time = 12.372 ms
+Method = hybrid
+All-gather bus bw for 32 GPUs is 53.793 GBPS for message output size 268.435 MB
+time = 4.834 ms
+===============================
+output size = 512 MB
+Method = nccl
+All-gather bus bw for 32 GPUs is 71.885 GBPS for message output size 536.871 MB
+time = 7.235 ms
+Method = mpi
+All-gather bus bw for 32 GPUs is 21.327 GBPS for message output size 536.871 MB
+time = 24.386 ms
+srun: error: frontier09310: tasks 8,11,13: Killed
+srun: Terminating StepId=2985166.0
+slurmstepd: error: *** STEP 2985166.0 ON frontier09309 CANCELLED AT 2025-01-29T13:01:41 ***
+srun: error: frontier09310: tasks 9-10,12,14: Killed
+srun: error: frontier10214: tasks 24-26,28-31: Terminated
+srun: error: frontier09309: tasks 1-7: Terminated
+srun: error: frontier09309: task 0: Terminated
+srun: error: frontier10214: task 27: Terminated
+srun: error: frontier09340: tasks 16-23: Terminated
+srun: error: frontier09310: task 15: Killed
+srun: Force Terminated StepId=2985166.0

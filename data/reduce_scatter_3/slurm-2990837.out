@@ -1,0 +1,389 @@
+srun -N 32 -n 256 -c7 --gpus-per-task=1 --gpu-bind=closest python -u benchmark_reduce_scatter.py
+PE 0: MPICH CH4 OFI detected 4 NICs/node on host frontier04316
+PE 0: MPICH CH4 OFI limiting NIC usage by setting of MPICH_OFI_NUM_NICS=[4]
+PE 0: MPICH CH4 OFI netmod using cxi provider (domain_name=cxi2, src_addr=0x13d80)
+PE 0: Selected traffic class: [TC_BEST_EFFORT, 512]
+PE 0: MPICH CH4 OFI CXI counters initialized
+PE 0: MPICH CH4 OFI global connections for 256 ranks took 0.00405414 seconds.
+[W socket.cpp:464] [c10d] The server socket cannot be initialized on [::]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier04316.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier04316.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier04316.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier04316.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier04316.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier04316.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier04316.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier04316.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier04316.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier04316.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier04316.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier04316.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier04316.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier04316.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier04316.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier04316.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier04316.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier04316.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier04316.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier04316.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier04316.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier04316.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier04316.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier04316.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier04316.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier04316.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier04316.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier04316.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier04316.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier04316.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier04316.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier04316.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier04316.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier04316.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier04316.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier04316.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier04316.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier04316.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier04316.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier04316.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier04316.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier04316.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier04316.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier04316.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier04316.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier04316.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier04316.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier04316.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier04316.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier04316.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier04316.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier04316.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier04316.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier04316.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier04316.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier04316.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier04316.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier04316.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier04316.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier04316.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier04316.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier04316.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier04316.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier04316.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier04316.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier04316.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier04316.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier04316.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier04316.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier04316.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier04316.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier04316.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier04316.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier04316.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier04316.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier04316.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier04316.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier04316.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier04316.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier04316.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier04316.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier04316.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier04316.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier04316.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier04316.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier04316.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier04316.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier04316.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier04316.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier04316.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier04316.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier04316.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier04316.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier04316.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier04316.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier04316.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier04316.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier04316.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier04316.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier04316.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier04316.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier04316.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier04316.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier04316.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier04316.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier04316.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier04316.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier04316.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier04316.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier04316.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier04316.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier04316.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier04316.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier04316.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier04316.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier04316.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier04316.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier04316.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier04316.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier04316.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier04316.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier04316.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier04316.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier04316.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier04316.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier04316.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier04316.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier04316.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier04316.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier04316.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier04316.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier04316.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier04316.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier04316.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier04316.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier04316.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier04316.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier04316.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier04316.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier04316.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier04316.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier04316.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier04316.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier04316.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier04316.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier04316.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier04316.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier04316.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier04316.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier04316.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier04316.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier04316.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier04316.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier04316.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier04316.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier04316.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier04316.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier04316.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier04316.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier04316.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier04316.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier04316.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier04316.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier04316.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier04316.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier04316.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier04316.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier04316.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier04316.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier04316.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier04316.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier04316.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier04316.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier04316.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier04316.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier04316.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier04316.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier04316.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier04316.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier04316.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier04316.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier04316.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier04316.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier04316.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier04316.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier04316.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier04316.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier04316.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier04316.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier04316.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier04316.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier04316.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier04316.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier04316.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier04316.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier04316.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier04316.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier04316.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier04316.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier04316.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier04316.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier04316.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier04316.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier04316.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier04316.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier04316.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier04316.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier04316.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier04316.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier04316.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier04316.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier04316.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier04316.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier04316.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier04316.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier04316.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier04316.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier04316.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier04316.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier04316.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier04316.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier04316.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier04316.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier04316.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier04316.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier04316.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier04316.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier04316.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier04316.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier04316.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier04316.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier04316.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier04316.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier04316.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier04316.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier04316.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier04316.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier04316.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier04316.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier04316.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier04316.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier04316.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier04316.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier04316.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier04316.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier04316.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier04316.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier04316.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier04316.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier04316.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier04316.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier04316.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier04316.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier04316.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier04316.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier04316.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+input size = 1 MB
+Method = mpi
+Reduce scatter bus bw for 256 GPUs is 1.171 GBPS for message output size 0.004 MB
+time = 0.892 ms
+Method = nccl
+Reduce scatter bus bw for 256 GPUs is 0.048 GBPS for message output size 0.004 MB
+time = 21.779 ms
+Method = hybrid
+Reduce scatter bus bw for 256 GPUs is 0.766 GBPS for message output size 0.004 MB
+time = 1.363 ms
+===============================
+input size = 2 MB
+Method = mpi
+Reduce scatter bus bw for 256 GPUs is 2.033 GBPS for message output size 0.008 MB
+time = 1.028 ms
+Method = nccl
+Reduce scatter bus bw for 256 GPUs is 1.281 GBPS for message output size 0.008 MB
+time = 1.631 ms
+Method = hybrid
+Reduce scatter bus bw for 256 GPUs is 1.673 GBPS for message output size 0.008 MB
+time = 1.249 ms
+===============================
+input size = 4 MB
+Method = mpi
+Reduce scatter bus bw for 256 GPUs is 4.202 GBPS for message output size 0.016 MB
+time = 0.994 ms
+Method = nccl
+Reduce scatter bus bw for 256 GPUs is 1.873 GBPS for message output size 0.016 MB
+time = 2.231 ms
+Method = hybrid
+Reduce scatter bus bw for 256 GPUs is 3.216 GBPS for message output size 0.016 MB
+time = 1.299 ms
+===============================
+input size = 8 MB
+Method = mpi
+Reduce scatter bus bw for 256 GPUs is 7.679 GBPS for message output size 0.033 MB
+time = 1.088 ms
+Method = nccl
+Reduce scatter bus bw for 256 GPUs is 2.071 GBPS for message output size 0.033 MB
+time = 4.034 ms
+Method = hybrid
+Reduce scatter bus bw for 256 GPUs is 6.335 GBPS for message output size 0.033 MB
+time = 1.319 ms
+===============================
+input size = 16 MB
+Method = mpi
+Reduce scatter bus bw for 256 GPUs is 12.546 GBPS for message output size 0.066 MB
+time = 1.332 ms
+Method = nccl
+Reduce scatter bus bw for 256 GPUs is 3.814 GBPS for message output size 0.066 MB
+time = 4.382 ms
+Method = hybrid
+Reduce scatter bus bw for 256 GPUs is 11.252 GBPS for message output size 0.066 MB
+time = 1.485 ms
+===============================
+input size = 32 MB
+Method = mpi
+Reduce scatter bus bw for 256 GPUs is 17.224 GBPS for message output size 0.131 MB
+time = 1.941 ms
+Method = nccl
+Reduce scatter bus bw for 256 GPUs is 4.867 GBPS for message output size 0.131 MB
+time = 6.867 ms
+Method = hybrid
+Reduce scatter bus bw for 256 GPUs is 18.002 GBPS for message output size 0.131 MB
+time = 1.857 ms
+===============================
+input size = 64 MB
+Method = mpi
+Reduce scatter bus bw for 256 GPUs is 20.840 GBPS for message output size 0.262 MB
+time = 3.208 ms
+Method = nccl
+Reduce scatter bus bw for 256 GPUs is 9.616 GBPS for message output size 0.262 MB
+time = 6.952 ms
+Method = hybrid
+Reduce scatter bus bw for 256 GPUs is 24.547 GBPS for message output size 0.262 MB
+time = 2.723 ms
+===============================
+input size = 128 MB
+Method = mpi
+Reduce scatter bus bw for 256 GPUs is 22.416 GBPS for message output size 0.524 MB
+time = 5.964 ms
+Method = nccl
+Reduce scatter bus bw for 256 GPUs is 18.833 GBPS for message output size 0.524 MB
+time = 7.099 ms
+Method = hybrid
+Reduce scatter bus bw for 256 GPUs is 30.688 GBPS for message output size 0.524 MB
+time = 4.357 ms
+===============================
+input size = 256 MB
+Method = mpi
+Reduce scatter bus bw for 256 GPUs is 23.237 GBPS for message output size 1.049 MB
+time = 11.507 ms
+Method = nccl
+Reduce scatter bus bw for 256 GPUs is 33.610 GBPS for message output size 1.049 MB
+time = 7.956 ms
+Method = hybrid
+Reduce scatter bus bw for 256 GPUs is 35.127 GBPS for message output size 1.049 MB
+time = 7.612 ms
+===============================
+input size = 512 MB
+Method = mpi
+Reduce scatter bus bw for 256 GPUs is 23.958 GBPS for message output size 2.097 MB
+time = 22.321 ms
+Method = nccl
+Reduce scatter bus bw for 256 GPUs is 61.503 GBPS for message output size 2.097 MB
+time = 8.695 ms
+Method = hybrid
+Reduce scatter bus bw for 256 GPUs is 36.449 GBPS for message output size 2.097 MB
+time = 14.672 ms
+===============================
+input size = 1024 MB
+Method = mpi
+Reduce scatter bus bw for 256 GPUs is 24.160 GBPS for message output size 4.194 MB
+time = 44.269 ms
+Method = nccl
+Reduce scatter bus bw for 256 GPUs is 73.725 GBPS for message output size 4.194 MB
+time = 14.507 ms
+Method = hybrid
+Reduce scatter bus bw for 256 GPUs is 37.351 GBPS for message output size 4.194 MB
+time = 28.635 ms
+===============================
+{'rccl': [0.047958719331802624, 1.2807656276128259, 1.872722026261419, 2.0714806179545766, 3.81388144008442, 4.8670528901648265, 9.61605557434966, 18.833056586067652, 33.61016637341967, 61.502696107644226, 73.7245511328756], 'hybrid': [0.7663063005388245, 1.6728641469412837, 3.216167575521672, 6.334725043653102, 11.25178746443438, 18.002202052212315, 24.54730661820466, 30.687988937837567, 35.12666957759271, 36.44942097035094, 37.35117398063787], 'mpi': [1.1714553400930494, 2.032927628065288, 4.201676685878181, 7.679132538221954, 12.546029255912583, 17.223677904253744, 20.83968824152226, 22.415855681038657, 23.23738308811301, 23.958076420824582, 24.160286149937185]}
+
+MPICH Slingshot Network Summary: 0 network timeouts
+

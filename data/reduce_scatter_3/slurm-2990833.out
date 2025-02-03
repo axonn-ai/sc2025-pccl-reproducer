@@ -1,0 +1,149 @@
+srun -N 2 -n 16 -c7 --gpus-per-task=1 --gpu-bind=closest python -u benchmark_reduce_scatter.py
+PE 0: MPICH CH4 OFI detected 4 NICs/node on host frontier05629
+PE 0: MPICH CH4 OFI limiting NIC usage by setting of MPICH_OFI_NUM_NICS=[4]
+PE 0: MPICH CH4 OFI netmod using cxi provider (domain_name=cxi2, src_addr=0x18f12)
+PE 0: Selected traffic class: [TC_BEST_EFFORT, 512]
+PE 0: MPICH CH4 OFI CXI counters initialized
+PE 0: MPICH CH4 OFI global connections for 16 ranks took 0.00201668 seconds.
+[W socket.cpp:464] [c10d] The server socket cannot be initialized on [::]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier05629.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier05629.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier05629.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier05629.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier05629.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier05629.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier05629.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier05629.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier05629.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier05629.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier05629.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier05629.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier05629.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier05629.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier05629.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier05629.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+input size = 1 MB
+Method = mpi
+Reduce scatter bus bw for 16 GPUs is 1.950 GBPS for message output size 0.066 MB
+time = 0.504 ms
+Method = nccl
+Reduce scatter bus bw for 16 GPUs is 3.103 GBPS for message output size 0.066 MB
+time = 0.317 ms
+Method = hybrid
+Reduce scatter bus bw for 16 GPUs is 2.558 GBPS for message output size 0.066 MB
+time = 0.384 ms
+===============================
+input size = 2 MB
+Method = mpi
+Reduce scatter bus bw for 16 GPUs is 3.716 GBPS for message output size 0.131 MB
+time = 0.529 ms
+Method = nccl
+Reduce scatter bus bw for 16 GPUs is 5.025 GBPS for message output size 0.131 MB
+time = 0.391 ms
+Method = hybrid
+Reduce scatter bus bw for 16 GPUs is 5.011 GBPS for message output size 0.131 MB
+time = 0.392 ms
+===============================
+input size = 4 MB
+Method = mpi
+Reduce scatter bus bw for 16 GPUs is 6.769 GBPS for message output size 0.262 MB
+time = 0.581 ms
+Method = nccl
+Reduce scatter bus bw for 16 GPUs is 7.753 GBPS for message output size 0.262 MB
+time = 0.507 ms
+Method = hybrid
+Reduce scatter bus bw for 16 GPUs is 9.765 GBPS for message output size 0.262 MB
+time = 0.403 ms
+===============================
+input size = 8 MB
+Method = mpi
+Reduce scatter bus bw for 16 GPUs is 11.516 GBPS for message output size 0.524 MB
+time = 0.683 ms
+Method = nccl
+Reduce scatter bus bw for 16 GPUs is 16.044 GBPS for message output size 0.524 MB
+time = 0.490 ms
+Method = hybrid
+Reduce scatter bus bw for 16 GPUs is 16.454 GBPS for message output size 0.524 MB
+time = 0.478 ms
+===============================
+input size = 16 MB
+Method = mpi
+Reduce scatter bus bw for 16 GPUs is 17.504 GBPS for message output size 1.049 MB
+time = 0.899 ms
+Method = nccl
+Reduce scatter bus bw for 16 GPUs is 28.798 GBPS for message output size 1.049 MB
+time = 0.546 ms
+Method = hybrid
+Reduce scatter bus bw for 16 GPUs is 25.373 GBPS for message output size 1.049 MB
+time = 0.620 ms
+===============================
+input size = 32 MB
+Method = mpi
+Reduce scatter bus bw for 16 GPUs is 22.763 GBPS for message output size 2.097 MB
+time = 1.382 ms
+Method = nccl
+Reduce scatter bus bw for 16 GPUs is 51.194 GBPS for message output size 2.097 MB
+time = 0.614 ms
+Method = hybrid
+Reduce scatter bus bw for 16 GPUs is 34.269 GBPS for message output size 2.097 MB
+time = 0.918 ms
+===============================
+input size = 64 MB
+Method = mpi
+Reduce scatter bus bw for 16 GPUs is 25.710 GBPS for message output size 4.194 MB
+time = 2.447 ms
+Method = nccl
+Reduce scatter bus bw for 16 GPUs is 66.758 GBPS for message output size 4.194 MB
+time = 0.942 ms
+Method = hybrid
+Reduce scatter bus bw for 16 GPUs is 41.014 GBPS for message output size 4.194 MB
+time = 1.534 ms
+===============================
+input size = 128 MB
+Method = mpi
+Reduce scatter bus bw for 16 GPUs is 27.968 GBPS for message output size 8.389 MB
+time = 4.499 ms
+Method = nccl
+Reduce scatter bus bw for 16 GPUs is 72.677 GBPS for message output size 8.389 MB
+time = 1.731 ms
+Method = hybrid
+Reduce scatter bus bw for 16 GPUs is 44.612 GBPS for message output size 8.389 MB
+time = 2.821 ms
+===============================
+input size = 256 MB
+Method = mpi
+Reduce scatter bus bw for 16 GPUs is 28.101 GBPS for message output size 16.777 MB
+time = 8.956 ms
+Method = nccl
+Reduce scatter bus bw for 16 GPUs is 75.944 GBPS for message output size 16.777 MB
+time = 3.314 ms
+Method = hybrid
+Reduce scatter bus bw for 16 GPUs is 46.540 GBPS for message output size 16.777 MB
+time = 5.407 ms
+===============================
+input size = 512 MB
+Method = mpi
+Reduce scatter bus bw for 16 GPUs is 28.964 GBPS for message output size 33.554 MB
+time = 17.377 ms
+Method = nccl
+Reduce scatter bus bw for 16 GPUs is 77.770 GBPS for message output size 33.554 MB
+time = 6.472 ms
+Method = hybrid
+Reduce scatter bus bw for 16 GPUs is 47.267 GBPS for message output size 33.554 MB
+time = 10.648 ms
+===============================
+input size = 1024 MB
+Method = mpi
+Reduce scatter bus bw for 16 GPUs is 29.427 GBPS for message output size 67.109 MB
+time = 34.208 ms
+Method = nccl
+Reduce scatter bus bw for 16 GPUs is 78.310 GBPS for message output size 67.109 MB
+time = 12.855 ms
+Method = hybrid
+Reduce scatter bus bw for 16 GPUs is 46.204 GBPS for message output size 67.109 MB
+time = 21.787 ms
+===============================
+{'rccl': [3.1034760740924425, 5.02510914426663, 7.752617117139254, 16.044262840783986, 28.797518326465873, 51.19425083589474, 66.75825987896056, 72.67723479272624, 75.9435386040339, 77.77037471828208, 78.30955899086788], 'hybrid': [2.557848450534452, 5.010969681771013, 9.765091082832793, 16.453519769974392, 25.372502108606852, 34.269306220276924, 41.013504770017704, 44.61205319050954, 46.5402629583892, 47.26684028459251, 46.20356423535267], 'mpi': [1.9497175630810895, 3.7156112420309375, 6.769447103077712, 11.516308307316447, 17.50413127863043, 22.76327665553965, 25.709596370351562, 27.967770957595732, 28.100934647162724, 28.963902495574704, 29.42710299259365]}
+
+MPICH Slingshot Network Summary: 0 network timeouts
+

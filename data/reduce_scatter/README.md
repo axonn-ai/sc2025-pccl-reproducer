@@ -1,0 +1,1 @@
+this data was collected with a nerfed implementation of hybrid reduce-scatter.

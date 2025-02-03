@@ -1,0 +1,132 @@
+srun -N 1 -n 8 -c7 --gpus-per-task=1 --gpu-bind=closest python -u benchmark_all_gather.py
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier09454.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier09454.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier09454.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:464] [c10d] The server socket cannot be initialized on [::]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier09454.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier09454.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier09454.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier09454.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier09454.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+output size = 1 MB
+Method = nccl
+All-gather bus bw for 8 GPUs is 5.809 GBPS for message output size 1.049 MB
+time = 0.158 ms
+Method = mpi
+All-gather bus bw for 8 GPUs is 4.345 GBPS for message output size 1.049 MB
+time = 0.211 ms
+Method = hybrid
+All-gather bus bw for 8 GPUs is 3.628 GBPS for message output size 1.049 MB
+time = 0.253 ms
+===============================
+output size = 2 MB
+Method = nccl
+All-gather bus bw for 8 GPUs is 11.427 GBPS for message output size 2.097 MB
+time = 0.161 ms
+Method = mpi
+All-gather bus bw for 8 GPUs is 7.755 GBPS for message output size 2.097 MB
+time = 0.237 ms
+Method = hybrid
+All-gather bus bw for 8 GPUs is 6.994 GBPS for message output size 2.097 MB
+time = 0.262 ms
+===============================
+output size = 4 MB
+Method = nccl
+All-gather bus bw for 8 GPUs is 21.154 GBPS for message output size 4.194 MB
+time = 0.173 ms
+Method = mpi
+All-gather bus bw for 8 GPUs is 12.147 GBPS for message output size 4.194 MB
+time = 0.302 ms
+Method = hybrid
+All-gather bus bw for 8 GPUs is 13.640 GBPS for message output size 4.194 MB
+time = 0.269 ms
+===============================
+output size = 8 MB
+Method = nccl
+All-gather bus bw for 8 GPUs is 35.584 GBPS for message output size 8.389 MB
+time = 0.206 ms
+Method = mpi
+All-gather bus bw for 8 GPUs is 17.337 GBPS for message output size 8.389 MB
+time = 0.423 ms
+Method = hybrid
+All-gather bus bw for 8 GPUs is 27.239 GBPS for message output size 8.389 MB
+time = 0.269 ms
+===============================
+output size = 16 MB
+Method = nccl
+All-gather bus bw for 8 GPUs is 55.415 GBPS for message output size 16.777 MB
+time = 0.265 ms
+Method = mpi
+All-gather bus bw for 8 GPUs is 21.741 GBPS for message output size 16.777 MB
+time = 0.675 ms
+Method = hybrid
+All-gather bus bw for 8 GPUs is 43.215 GBPS for message output size 16.777 MB
+time = 0.340 ms
+===============================
+output size = 32 MB
+Method = nccl
+All-gather bus bw for 8 GPUs is 72.244 GBPS for message output size 33.554 MB
+time = 0.406 ms
+Method = mpi
+All-gather bus bw for 8 GPUs is 24.723 GBPS for message output size 33.554 MB
+time = 1.188 ms
+Method = hybrid
+All-gather bus bw for 8 GPUs is 59.968 GBPS for message output size 33.554 MB
+time = 0.490 ms
+===============================
+output size = 64 MB
+Method = nccl
+All-gather bus bw for 8 GPUs is 83.391 GBPS for message output size 67.109 MB
+time = 0.704 ms
+Method = mpi
+All-gather bus bw for 8 GPUs is 26.682 GBPS for message output size 67.109 MB
+time = 2.201 ms
+Method = hybrid
+All-gather bus bw for 8 GPUs is 74.550 GBPS for message output size 67.109 MB
+time = 0.788 ms
+===============================
+output size = 128 MB
+Method = nccl
+All-gather bus bw for 8 GPUs is 88.968 GBPS for message output size 134.218 MB
+time = 1.320 ms
+Method = mpi
+All-gather bus bw for 8 GPUs is 27.305 GBPS for message output size 134.218 MB
+time = 4.301 ms
+Method = hybrid
+All-gather bus bw for 8 GPUs is 83.214 GBPS for message output size 134.218 MB
+time = 1.411 ms
+===============================
+output size = 256 MB
+Method = nccl
+All-gather bus bw for 8 GPUs is 90.795 GBPS for message output size 268.435 MB
+time = 2.587 ms
+Method = mpi
+All-gather bus bw for 8 GPUs is 27.630 GBPS for message output size 268.435 MB
+time = 8.501 ms
+Method = hybrid
+All-gather bus bw for 8 GPUs is 87.082 GBPS for message output size 268.435 MB
+time = 2.697 ms
+===============================
+output size = 512 MB
+Method = nccl
+All-gather bus bw for 8 GPUs is 90.462 GBPS for message output size 536.871 MB
+time = 5.193 ms
+Method = mpi
+All-gather bus bw for 8 GPUs is 27.805 GBPS for message output size 536.871 MB
+time = 16.895 ms
+Method = hybrid
+All-gather bus bw for 8 GPUs is 87.838 GBPS for message output size 536.871 MB
+time = 5.348 ms
+===============================
+output size = 1024 MB
+Method = nccl
+All-gather bus bw for 8 GPUs is 89.867 GBPS for message output size 1073.742 MB
+time = 10.455 ms
+Method = mpi
+All-gather bus bw for 8 GPUs is 27.875 GBPS for message output size 1073.742 MB
+time = 33.705 ms
+Method = hybrid
+All-gather bus bw for 8 GPUs is 87.688 GBPS for message output size 1073.742 MB
+time = 10.714 ms
+===============================
+{'mpi': [4.34457564633671, 7.75495629478777, 12.146587264269861, 17.33691910504043, 21.74078672729191, 24.72325011152729, 26.68153168384015, 27.30485547650797, 27.629592795370435, 27.804826540014215, 27.874728953397547], 'rccl': [5.808755744928207, 11.426528959530264, 21.154305261761188, 35.584272720789, 55.41489097712813, 72.24444581760133, 83.3905382890468, 88.96797541732408, 90.79483733019852, 90.46249276532278, 89.86731035053356], 'hybrid': [3.6284484911646753, 6.994028996136071, 13.639541589242322, 27.23858048313043, 43.21534931284736, 59.967617863343605, 74.54992575350026, 83.21376052727979, 87.08177978641257, 87.83756549839342, 87.6875064842272]}

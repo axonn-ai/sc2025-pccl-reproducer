@@ -1,0 +1,99 @@
+srun -N 1 -n 8 -c7 --gpus-per-task=1 --gpu-bind=closest python -u benchmark_reduce_scatter.py
+[W socket.cpp:464] [c10d] The server socket cannot be initialized on [::]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier08311.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier08311.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier08311.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier08311.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier08311.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier08311.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier08311.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier08311.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+input size = 1 MB
+Method = nccl
+Reduce scatter bus bw for 8 GPUs is 8.359 GBPS for message output size 0.131 MB
+time = 0.110 ms
+Method = hybrid
+Reduce scatter bus bw for 8 GPUs is 3.389 GBPS for message output size 0.131 MB
+time = 0.271 ms
+===============================
+input size = 2 MB
+Method = nccl
+Reduce scatter bus bw for 8 GPUs is 14.806 GBPS for message output size 0.262 MB
+time = 0.124 ms
+Method = hybrid
+Reduce scatter bus bw for 8 GPUs is 6.339 GBPS for message output size 0.262 MB
+time = 0.289 ms
+===============================
+input size = 4 MB
+Method = nccl
+Reduce scatter bus bw for 8 GPUs is 24.819 GBPS for message output size 0.524 MB
+time = 0.148 ms
+Method = hybrid
+Reduce scatter bus bw for 8 GPUs is 11.485 GBPS for message output size 0.524 MB
+time = 0.320 ms
+===============================
+input size = 8 MB
+Method = nccl
+Reduce scatter bus bw for 8 GPUs is 36.342 GBPS for message output size 1.049 MB
+time = 0.202 ms
+Method = hybrid
+Reduce scatter bus bw for 8 GPUs is 19.605 GBPS for message output size 1.049 MB
+time = 0.374 ms
+===============================
+input size = 16 MB
+Method = nccl
+Reduce scatter bus bw for 8 GPUs is 49.293 GBPS for message output size 2.097 MB
+time = 0.298 ms
+Method = hybrid
+Reduce scatter bus bw for 8 GPUs is 30.769 GBPS for message output size 2.097 MB
+time = 0.477 ms
+===============================
+input size = 32 MB
+Method = nccl
+Reduce scatter bus bw for 8 GPUs is 60.172 GBPS for message output size 4.194 MB
+time = 0.488 ms
+Method = hybrid
+Reduce scatter bus bw for 8 GPUs is 39.737 GBPS for message output size 4.194 MB
+time = 0.739 ms
+===============================
+input size = 64 MB
+Method = nccl
+Reduce scatter bus bw for 8 GPUs is 67.339 GBPS for message output size 8.389 MB
+time = 0.872 ms
+Method = hybrid
+Reduce scatter bus bw for 8 GPUs is 45.921 GBPS for message output size 8.389 MB
+time = 1.279 ms
+===============================
+input size = 128 MB
+Method = nccl
+Reduce scatter bus bw for 8 GPUs is 71.801 GBPS for message output size 16.777 MB
+time = 1.636 ms
+Method = hybrid
+Reduce scatter bus bw for 8 GPUs is 49.591 GBPS for message output size 16.777 MB
+time = 2.368 ms
+===============================
+input size = 256 MB
+Method = nccl
+Reduce scatter bus bw for 8 GPUs is 74.086 GBPS for message output size 33.554 MB
+time = 3.170 ms
+Method = hybrid
+Reduce scatter bus bw for 8 GPUs is 52.315 GBPS for message output size 33.554 MB
+time = 4.490 ms
+===============================
+input size = 512 MB
+Method = nccl
+Reduce scatter bus bw for 8 GPUs is 74.748 GBPS for message output size 67.109 MB
+time = 6.285 ms
+Method = hybrid
+Reduce scatter bus bw for 8 GPUs is 53.476 GBPS for message output size 67.109 MB
+time = 8.785 ms
+===============================
+input size = 1024 MB
+Method = nccl
+Reduce scatter bus bw for 8 GPUs is 75.595 GBPS for message output size 134.218 MB
+time = 12.428 ms
+Method = hybrid
+Reduce scatter bus bw for 8 GPUs is 53.750 GBPS for message output size 134.218 MB
+time = 17.479 ms
+===============================
+{'rccl': [8.359137953459433, 14.806009833057884, 24.818702400910976, 36.342297388843406, 49.29338886529625, 60.171717802573795, 67.33935717437762, 71.80086996990983, 74.0862849434499, 74.74833168836693, 75.59544801106836], 'hybrid': [3.388902547750344, 6.33948401081564, 11.484807124626558, 19.60549849114881, 30.768919792107354, 39.73746884591042, 45.92142688104668, 49.59115578607331, 52.31469763830997, 53.47594054790677, 53.750253770525866]}

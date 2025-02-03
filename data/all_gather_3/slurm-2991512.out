@@ -1,0 +1,165 @@
+srun -N 4 -n 32 -c7 --gpus-per-task=1 --gpu-bind=closest python -u benchmark_all_gather.py
+PE 0: MPICH CH4 OFI detected 4 NICs/node on host frontier09059
+PE 0: MPICH CH4 OFI limiting NIC usage by setting of MPICH_OFI_NUM_NICS=[4]
+PE 0: MPICH CH4 OFI netmod using cxi provider (domain_name=cxi2, src_addr=0x26623)
+PE 0: Selected traffic class: [TC_BEST_EFFORT, 512]
+PE 0: MPICH CH4 OFI CXI counters initialized
+PE 0: MPICH CH4 OFI global connections for 32 ranks took 0.00194346 seconds.
+[W socket.cpp:464] [c10d] The server socket cannot be initialized on [::]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier09059.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier09059.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier09059.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier09059.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier09059.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier09059.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier09059.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier09059.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier09059.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier09059.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier09059.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier09059.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier09059.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier09059.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier09059.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier09059.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier09059.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier09059.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier09059.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier09059.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier09059.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier09059.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier09059.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier09059.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier09059.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier09059.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier09059.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier09059.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier09059.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier09059.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier09059.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier09059.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+output size = 1 MB
+Method = nccl
+All-gather bus bw for 32 GPUs is 0.984 GBPS for message output size 1.049 MB
+time = 1.032 ms
+Method = mpi
+All-gather bus bw for 32 GPUs is 3.264 GBPS for message output size 1.049 MB
+time = 0.311 ms
+Method = hybrid
+All-gather bus bw for 32 GPUs is 3.263 GBPS for message output size 1.049 MB
+time = 0.311 ms
+===============================
+output size = 2 MB
+Method = nccl
+All-gather bus bw for 32 GPUs is 2.843 GBPS for message output size 2.097 MB
+time = 0.715 ms
+Method = mpi
+All-gather bus bw for 32 GPUs is 5.243 GBPS for message output size 2.097 MB
+time = 0.387 ms
+Method = hybrid
+All-gather bus bw for 32 GPUs is 6.270 GBPS for message output size 2.097 MB
+time = 0.324 ms
+===============================
+output size = 4 MB
+Method = nccl
+All-gather bus bw for 32 GPUs is 4.045 GBPS for message output size 4.194 MB
+time = 1.004 ms
+Method = mpi
+All-gather bus bw for 32 GPUs is 7.611 GBPS for message output size 4.194 MB
+time = 0.534 ms
+Method = hybrid
+All-gather bus bw for 32 GPUs is 11.960 GBPS for message output size 4.194 MB
+time = 0.340 ms
+===============================
+output size = 8 MB
+Method = nccl
+All-gather bus bw for 32 GPUs is 8.086 GBPS for message output size 8.389 MB
+time = 1.005 ms
+Method = mpi
+All-gather bus bw for 32 GPUs is 9.761 GBPS for message output size 8.389 MB
+time = 0.833 ms
+Method = hybrid
+All-gather bus bw for 32 GPUs is 21.558 GBPS for message output size 8.389 MB
+time = 0.377 ms
+===============================
+output size = 16 MB
+Method = nccl
+All-gather bus bw for 32 GPUs is 15.966 GBPS for message output size 16.777 MB
+time = 1.018 ms
+Method = mpi
+All-gather bus bw for 32 GPUs is 11.368 GBPS for message output size 16.777 MB
+time = 1.430 ms
+Method = hybrid
+All-gather bus bw for 32 GPUs is 33.276 GBPS for message output size 16.777 MB
+time = 0.488 ms
+===============================
+output size = 32 MB
+Method = nccl
+All-gather bus bw for 32 GPUs is 28.933 GBPS for message output size 33.554 MB
+time = 1.123 ms
+Method = mpi
+All-gather bus bw for 32 GPUs is 12.371 GBPS for message output size 33.554 MB
+time = 2.627 ms
+Method = hybrid
+All-gather bus bw for 32 GPUs is 42.926 GBPS for message output size 33.554 MB
+time = 0.757 ms
+===============================
+output size = 64 MB
+Method = nccl
+All-gather bus bw for 32 GPUs is 51.890 GBPS for message output size 67.109 MB
+time = 1.253 ms
+Method = mpi
+All-gather bus bw for 32 GPUs is 20.482 GBPS for message output size 67.109 MB
+time = 3.174 ms
+Method = hybrid
+All-gather bus bw for 32 GPUs is 49.795 GBPS for message output size 67.109 MB
+time = 1.306 ms
+===============================
+output size = 128 MB
+Method = nccl
+All-gather bus bw for 32 GPUs is 69.791 GBPS for message output size 134.218 MB
+time = 1.863 ms
+Method = mpi
+All-gather bus bw for 32 GPUs is 22.090 GBPS for message output size 134.218 MB
+time = 5.886 ms
+Method = hybrid
+All-gather bus bw for 32 GPUs is 53.946 GBPS for message output size 134.218 MB
+time = 2.410 ms
+===============================
+output size = 256 MB
+Method = nccl
+All-gather bus bw for 32 GPUs is 71.845 GBPS for message output size 268.435 MB
+time = 3.620 ms
+Method = mpi
+All-gather bus bw for 32 GPUs is 22.969 GBPS for message output size 268.435 MB
+time = 11.322 ms
+Method = hybrid
+All-gather bus bw for 32 GPUs is 55.422 GBPS for message output size 268.435 MB
+time = 4.692 ms
+===============================
+output size = 512 MB
+Method = nccl
+All-gather bus bw for 32 GPUs is 72.293 GBPS for message output size 536.871 MB
+time = 7.194 ms
+Method = mpi
+All-gather bus bw for 32 GPUs is 23.422 GBPS for message output size 536.871 MB
+time = 22.205 ms
+Method = hybrid
+All-gather bus bw for 32 GPUs is 53.595 GBPS for message output size 536.871 MB
+time = 9.704 ms
+===============================
+output size = 1024 MB
+Method = nccl
+All-gather bus bw for 32 GPUs is 72.052 GBPS for message output size 1073.742 MB
+time = 14.437 ms
+Method = mpi
+All-gather bus bw for 32 GPUs is 23.639 GBPS for message output size 1073.742 MB
+time = 44.003 ms
+Method = hybrid
+All-gather bus bw for 32 GPUs is 54.052 GBPS for message output size 1073.742 MB
+time = 19.244 ms
+===============================
+{'mpi': [3.2641498445082315, 5.243231797797634, 7.610837296358274, 9.761331870112524, 11.367794666089841, 12.371473425489361, 20.481553711160206, 22.089880898976286, 22.96894775485981, 23.4218434363651, 23.638996925014766], 'rccl': [0.9841680810926635, 2.843220751011579, 4.045412689276151, 8.086188148968644, 15.966473529111472, 28.932846373092215, 51.89023015098239, 69.79067030682452, 71.84469564826877, 72.29320755261854, 72.05203783102819], 'hybrid': [3.263143200593754, 6.270083092794014, 11.960190722419442, 21.557780693165967, 33.27555304904556, 42.926097007433334, 49.795493717356024, 53.94564216145926, 55.42243595254562, 53.59510809344931, 54.05184891281767]}
+
+MPICH Slingshot Network Summary: 0 network timeouts
+

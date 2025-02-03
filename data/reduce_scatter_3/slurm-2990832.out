@@ -1,0 +1,133 @@
+srun -N 1 -n 8 -c7 --gpus-per-task=1 --gpu-bind=closest python -u benchmark_reduce_scatter.py
+PE 0: MPICH CH4 OFI global connections for 8 ranks took 0.00454216 seconds.
+[W socket.cpp:464] [c10d] The server socket cannot be initialized on [::]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier00460.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier00460.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier00460.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier00460.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier00460.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier00460.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier00460.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier00460.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+input size = 1 MB
+Method = mpi
+Reduce scatter bus bw for 8 GPUs is 2.251 GBPS for message output size 0.131 MB
+time = 0.408 ms
+Method = nccl
+Reduce scatter bus bw for 8 GPUs is 8.104 GBPS for message output size 0.131 MB
+time = 0.113 ms
+Method = hybrid
+Reduce scatter bus bw for 8 GPUs is 3.421 GBPS for message output size 0.131 MB
+time = 0.268 ms
+===============================
+input size = 2 MB
+Method = mpi
+Reduce scatter bus bw for 8 GPUs is 4.279 GBPS for message output size 0.262 MB
+time = 0.429 ms
+Method = nccl
+Reduce scatter bus bw for 8 GPUs is 14.375 GBPS for message output size 0.262 MB
+time = 0.128 ms
+Method = hybrid
+Reduce scatter bus bw for 8 GPUs is 6.847 GBPS for message output size 0.262 MB
+time = 0.268 ms
+===============================
+input size = 4 MB
+Method = mpi
+Reduce scatter bus bw for 8 GPUs is 7.843 GBPS for message output size 0.524 MB
+time = 0.468 ms
+Method = nccl
+Reduce scatter bus bw for 8 GPUs is 24.332 GBPS for message output size 0.524 MB
+time = 0.151 ms
+Method = hybrid
+Reduce scatter bus bw for 8 GPUs is 13.582 GBPS for message output size 0.524 MB
+time = 0.270 ms
+===============================
+input size = 8 MB
+Method = mpi
+Reduce scatter bus bw for 8 GPUs is 12.994 GBPS for message output size 1.049 MB
+time = 0.565 ms
+Method = nccl
+Reduce scatter bus bw for 8 GPUs is 35.397 GBPS for message output size 1.049 MB
+time = 0.207 ms
+Method = hybrid
+Reduce scatter bus bw for 8 GPUs is 24.319 GBPS for message output size 1.049 MB
+time = 0.302 ms
+===============================
+input size = 16 MB
+Method = mpi
+Reduce scatter bus bw for 8 GPUs is 19.384 GBPS for message output size 2.097 MB
+time = 0.757 ms
+Method = nccl
+Reduce scatter bus bw for 8 GPUs is 48.317 GBPS for message output size 2.097 MB
+time = 0.304 ms
+Method = hybrid
+Reduce scatter bus bw for 8 GPUs is 36.637 GBPS for message output size 2.097 MB
+time = 0.401 ms
+===============================
+input size = 32 MB
+Method = mpi
+Reduce scatter bus bw for 8 GPUs is 24.640 GBPS for message output size 4.194 MB
+time = 1.192 ms
+Method = nccl
+Reduce scatter bus bw for 8 GPUs is 59.446 GBPS for message output size 4.194 MB
+time = 0.494 ms
+Method = hybrid
+Reduce scatter bus bw for 8 GPUs is 47.219 GBPS for message output size 4.194 MB
+time = 0.622 ms
+===============================
+input size = 64 MB
+Method = mpi
+Reduce scatter bus bw for 8 GPUs is 27.309 GBPS for message output size 8.389 MB
+time = 2.150 ms
+Method = nccl
+Reduce scatter bus bw for 8 GPUs is 67.239 GBPS for message output size 8.389 MB
+time = 0.873 ms
+Method = hybrid
+Reduce scatter bus bw for 8 GPUs is 53.043 GBPS for message output size 8.389 MB
+time = 1.107 ms
+===============================
+input size = 128 MB
+Method = mpi
+Reduce scatter bus bw for 8 GPUs is 28.996 GBPS for message output size 16.777 MB
+time = 4.050 ms
+Method = nccl
+Reduce scatter bus bw for 8 GPUs is 71.894 GBPS for message output size 16.777 MB
+time = 1.634 ms
+Method = hybrid
+Reduce scatter bus bw for 8 GPUs is 56.707 GBPS for message output size 16.777 MB
+time = 2.071 ms
+===============================
+input size = 256 MB
+Method = mpi
+Reduce scatter bus bw for 8 GPUs is 28.836 GBPS for message output size 33.554 MB
+time = 8.145 ms
+Method = nccl
+Reduce scatter bus bw for 8 GPUs is 73.980 GBPS for message output size 33.554 MB
+time = 3.175 ms
+Method = hybrid
+Reduce scatter bus bw for 8 GPUs is 58.278 GBPS for message output size 33.554 MB
+time = 4.030 ms
+===============================
+input size = 512 MB
+Method = mpi
+Reduce scatter bus bw for 8 GPUs is 29.928 GBPS for message output size 67.109 MB
+time = 15.696 ms
+Method = nccl
+Reduce scatter bus bw for 8 GPUs is 75.066 GBPS for message output size 67.109 MB
+time = 6.258 ms
+Method = hybrid
+Reduce scatter bus bw for 8 GPUs is 58.324 GBPS for message output size 67.109 MB
+time = 8.054 ms
+===============================
+input size = 1024 MB
+Method = mpi
+Reduce scatter bus bw for 8 GPUs is 30.348 GBPS for message output size 134.218 MB
+time = 30.958 ms
+Method = nccl
+Reduce scatter bus bw for 8 GPUs is 75.744 GBPS for message output size 134.218 MB
+time = 12.404 ms
+Method = hybrid
+Reduce scatter bus bw for 8 GPUs is 58.810 GBPS for message output size 134.218 MB
+time = 15.976 ms
+===============================
+{'rccl': [8.103956232604668, 14.375408653757871, 24.33160320655778, 35.39724072823683, 48.31726017654148, 59.446442148421816, 67.2392539944228, 71.89354830893247, 73.98009076313389, 75.06599449361666, 75.74389566694529], 'hybrid': [3.4208380410910237, 6.8469884901214515, 13.582083018326395, 24.318713071143776, 36.63685158433191, 47.219395657412576, 53.04290398252701, 56.706902617323465, 58.27825566735632, 58.323522792236126, 58.81028150910551], 'mpi': [2.250972386077588, 4.279207330014209, 7.842921685876603, 12.993851928434204, 19.38387011139107, 24.640033654770217, 27.309081103937924, 28.995815827966194, 28.835994105176248, 29.92810244859543, 30.34789260800935]}

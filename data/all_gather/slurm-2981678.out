@@ -1,0 +1,140 @@
+srun -N 2 -n 16 -c7 --ntasks-per-node=8 --gpus-per-node=8 python -u benchmark_all_gather.py
+[W socket.cpp:464] [c10d] The server socket cannot be initialized on [::]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier10211.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier10211.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier10211.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier10211.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier10211.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier10211.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier10211.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier10211.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier10211.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier10211.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier10211.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier10211.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier10211.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier10211.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier10211.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier10211.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+output size = 1 MB
+Method = nccl
+All-gather bus bw for 16 GPUs is 0.031 GBPS for message output size 1.049 MB
+time = 31.336 ms
+Method = mpi
+All-gather bus bw for 16 GPUs is 3.784 GBPS for message output size 1.049 MB
+time = 0.260 ms
+Method = hybrid
+All-gather bus bw for 16 GPUs is 2.531 GBPS for message output size 1.049 MB
+time = 0.388 ms
+===============================
+output size = 2 MB
+Method = nccl
+All-gather bus bw for 16 GPUs is 0.064 GBPS for message output size 2.097 MB
+time = 30.921 ms
+Method = mpi
+All-gather bus bw for 16 GPUs is 5.945 GBPS for message output size 2.097 MB
+time = 0.331 ms
+Method = hybrid
+All-gather bus bw for 16 GPUs is 6.722 GBPS for message output size 2.097 MB
+time = 0.292 ms
+===============================
+output size = 4 MB
+Method = nccl
+All-gather bus bw for 16 GPUs is 0.110 GBPS for message output size 4.194 MB
+time = 35.791 ms
+Method = mpi
+All-gather bus bw for 16 GPUs is 8.727 GBPS for message output size 4.194 MB
+time = 0.451 ms
+Method = hybrid
+All-gather bus bw for 16 GPUs is 13.095 GBPS for message output size 4.194 MB
+time = 0.300 ms
+===============================
+output size = 8 MB
+Method = nccl
+All-gather bus bw for 16 GPUs is 9.774 GBPS for message output size 8.389 MB
+time = 0.805 ms
+Method = mpi
+All-gather bus bw for 16 GPUs is 10.453 GBPS for message output size 8.389 MB
+time = 0.752 ms
+Method = hybrid
+All-gather bus bw for 16 GPUs is 24.445 GBPS for message output size 8.389 MB
+time = 0.322 ms
+===============================
+output size = 16 MB
+Method = nccl
+All-gather bus bw for 16 GPUs is 17.725 GBPS for message output size 16.777 MB
+time = 0.887 ms
+Method = mpi
+All-gather bus bw for 16 GPUs is 12.258 GBPS for message output size 16.777 MB
+time = 1.283 ms
+Method = hybrid
+All-gather bus bw for 16 GPUs is 34.604 GBPS for message output size 16.777 MB
+time = 0.455 ms
+===============================
+output size = 32 MB
+Method = nccl
+All-gather bus bw for 16 GPUs is 43.592 GBPS for message output size 33.554 MB
+time = 0.722 ms
+Method = mpi
+All-gather bus bw for 16 GPUs is 13.224 GBPS for message output size 33.554 MB
+time = 2.379 ms
+Method = hybrid
+All-gather bus bw for 16 GPUs is 36.384 GBPS for message output size 33.554 MB
+time = 0.865 ms
+===============================
+output size = 64 MB
+Method = nccl
+All-gather bus bw for 16 GPUs is 65.743 GBPS for message output size 67.109 MB
+time = 0.957 ms
+Method = mpi
+All-gather bus bw for 16 GPUs is 20.605 GBPS for message output size 67.109 MB
+time = 3.053 ms
+Method = hybrid
+All-gather bus bw for 16 GPUs is 51.352 GBPS for message output size 67.109 MB
+time = 1.225 ms
+===============================
+output size = 128 MB
+Method = nccl
+All-gather bus bw for 16 GPUs is 69.290 GBPS for message output size 134.218 MB
+time = 1.816 ms
+Method = mpi
+All-gather bus bw for 16 GPUs is 21.665 GBPS for message output size 134.218 MB
+time = 5.808 ms
+Method = hybrid
+All-gather bus bw for 16 GPUs is 55.704 GBPS for message output size 134.218 MB
+time = 2.259 ms
+===============================
+output size = 256 MB
+Method = nccl
+All-gather bus bw for 16 GPUs is 70.501 GBPS for message output size 268.435 MB
+time = 3.570 ms
+Method = mpi
+All-gather bus bw for 16 GPUs is 22.046 GBPS for message output size 268.435 MB
+time = 11.415 ms
+Method = hybrid
+All-gather bus bw for 16 GPUs is 55.525 GBPS for message output size 268.435 MB
+time = 4.532 ms
+===============================
+output size = 512 MB
+Method = nccl
+All-gather bus bw for 16 GPUs is 70.596 GBPS for message output size 536.871 MB
+time = 7.129 ms
+Method = mpi
+All-gather bus bw for 16 GPUs is 22.120 GBPS for message output size 536.871 MB
+time = 22.754 ms
+Method = hybrid
+All-gather bus bw for 16 GPUs is 55.492 GBPS for message output size 536.871 MB
+time = 9.070 ms
+===============================
+output size = 1024 MB
+Method = nccl
+All-gather bus bw for 16 GPUs is 71.417 GBPS for message output size 1073.742 MB
+time = 14.095 ms
+Method = mpi
+All-gather bus bw for 16 GPUs is 22.170 GBPS for message output size 1073.742 MB
+time = 45.406 ms
+Method = hybrid
+All-gather bus bw for 16 GPUs is 56.147 GBPS for message output size 1073.742 MB
+time = 17.928 ms
+===============================
+{'mpi': [3.78440477263408, 5.944826097072621, 8.726621955611328, 10.453383858474309, 12.258382654339709, 13.224231801746145, 20.60484228867247, 21.665371147843658, 22.046242504351802, 22.11989421409437, 22.16962323483677], 'rccl': [0.031371137468220726, 0.06358458253849943, 0.10986583715977936, 9.77367611020812, 17.724504194764368, 43.59170664265216, 65.74284324419487, 69.29013649628905, 70.50109541407754, 70.59634349459454, 71.41654293791419], 'hybrid': [2.530885614938201, 6.721705443856455, 13.095279211011519, 24.445119186457845, 34.604199691664206, 36.38382503572541, 51.35159302168654, 55.704396239798804, 55.52505969306674, 55.4920487769782, 56.14729412049171]}

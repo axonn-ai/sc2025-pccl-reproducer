@@ -1,0 +1,114 @@
+srun -N 4 -n 32 -c7 --ntasks-per-node=8 --gpus-per-node=8 python -u benchmark_reduce_scatter.py
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier00047.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier00047.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier00047.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier00047.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier00047.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier00047.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier00047.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier00047.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier00047.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier00047.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier00047.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier00047.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier00047.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier00047.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier00047.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier00047.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier00047.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier00047.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier00047.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier00047.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier00047.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier00047.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier00047.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:697] [c10d] The client socket cannot be initialized to connect to [frontier00047.frontier.olcf.ornl.gov]:29500 (errno: 97 - Address family not supported by protocol).
+input size = 1 MB
+Method = nccl
+Reduce scatter bus bw for 32 GPUs is 0.824 GBPS for message output size 0.033 MB
+time = 1.233 ms
+Method = hybrid
+Reduce scatter bus bw for 32 GPUs is 1.908 GBPS for message output size 0.033 MB
+time = 0.532 ms
+===============================
+input size = 2 MB
+Method = nccl
+Reduce scatter bus bw for 32 GPUs is 0.023 GBPS for message output size 0.066 MB
+time = 87.081 ms
+Method = hybrid
+Reduce scatter bus bw for 32 GPUs is 2.721 GBPS for message output size 0.066 MB
+time = 0.747 ms
+===============================
+input size = 4 MB
+Method = nccl
+Reduce scatter bus bw for 32 GPUs is 0.045 GBPS for message output size 0.131 MB
+time = 90.933 ms
+Method = hybrid
+Reduce scatter bus bw for 32 GPUs is 5.942 GBPS for message output size 0.131 MB
+time = 0.684 ms
+===============================
+input size = 8 MB
+Method = nccl
+Reduce scatter bus bw for 32 GPUs is 0.129 GBPS for message output size 0.262 MB
+time = 63.061 ms
+Method = hybrid
+Reduce scatter bus bw for 32 GPUs is 14.798 GBPS for message output size 0.262 MB
+time = 0.549 ms
+===============================
+input size = 16 MB
+Method = nccl
+Reduce scatter bus bw for 32 GPUs is 11.262 GBPS for message output size 0.524 MB
+time = 1.443 ms
+Method = hybrid
+Reduce scatter bus bw for 32 GPUs is 14.587 GBPS for message output size 0.524 MB
+time = 1.114 ms
+===============================
+input size = 32 MB
+Method = nccl
+Reduce scatter bus bw for 32 GPUs is 22.900 GBPS for message output size 1.049 MB
+time = 1.419 ms
+Method = hybrid
+Reduce scatter bus bw for 32 GPUs is 21.529 GBPS for message output size 1.049 MB
+time = 1.510 ms
+===============================
+input size = 64 MB
+Method = nccl
+Reduce scatter bus bw for 32 GPUs is 49.881 GBPS for message output size 2.097 MB
+time = 1.303 ms
+Method = hybrid
+Reduce scatter bus bw for 32 GPUs is 24.616 GBPS for message output size 2.097 MB
+time = 2.641 ms
+===============================
+input size = 128 MB
+Method = nccl
+Reduce scatter bus bw for 32 GPUs is 70.248 GBPS for message output size 4.194 MB
+time = 1.851 ms
+Method = hybrid
+Reduce scatter bus bw for 32 GPUs is 34.627 GBPS for message output size 4.194 MB
+time = 3.755 ms
+===============================
+input size = 256 MB
+Method = nccl
+Reduce scatter bus bw for 32 GPUs is 74.875 GBPS for message output size 8.389 MB
+time = 3.473 ms
+Method = hybrid
+Reduce scatter bus bw for 32 GPUs is 35.047 GBPS for message output size 8.389 MB
+time = 7.420 ms
+===============================
+input size = 512 MB
+Method = nccl
+Reduce scatter bus bw for 32 GPUs is 77.885 GBPS for message output size 16.777 MB
+time = 6.678 ms
+Method = hybrid
+Reduce scatter bus bw for 32 GPUs is 35.012 GBPS for message output size 16.777 MB
+time = 14.855 ms
+===============================
+input size = 1024 MB
+Method = nccl
+Reduce scatter bus bw for 32 GPUs is 79.309 GBPS for message output size 33.554 MB
+time = 13.116 ms
+Method = hybrid
+Reduce scatter bus bw for 32 GPUs is 34.910 GBPS for message output size 33.554 MB
+time = 29.797 ms
+===============================
+{'rccl': [0.8239041616701072, 0.023330240865171714, 0.04468396540331605, 0.12886679574269821, 11.262408378187637, 22.899809671506308, 49.88097174604887, 70.2484529928382, 74.87467147404078, 77.88487088785267, 79.30903586554034], 'hybrid': [1.9076797782902666, 2.7207024296587585, 5.941886674160837, 14.797674439912026, 14.586669435394619, 21.529197126262662, 24.61593870577715, 34.62717966225307, 35.04658767298426, 35.01197380745519, 34.90950969937621]}
