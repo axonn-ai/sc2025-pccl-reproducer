@@ -36,9 +36,21 @@ export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:$WRKSPC/aws-ofi-rccl/lib"
 
 # mpich gpu support
 export MPICH_GPU_SUPPORT_ENABLED=1
-export MPICH_OFI_NIC_POLICY="GPU"
-export MPICH_OFI_NUM_NICS=4
 export MPICH_OFI_VERBOSE=1
+
+export MPICH_OFI_NIC_POLICY="USER"
+export MPICH_OFI_NIC_MAPPING="0:0-1; 1:2-3; 2:4-5; 3:6-7"
+
+MASK_0="0x00fe000000000000" # Cores 49-55
+MASK_1="0xfe00000000000000" # Cores 57-64
+MASK_2="0x0000000000fe0000" # Cores 17-23
+MASK_3="0x00000000fe000000" # Cores 25-31
+MASK_4="0x00000000000000fe" # Cores 1-7
+MASK_5="0x000000000000fe00" # Cores 9-15
+MASK_6="0x000000fe00000000" # Cores 33-39
+MASK_7="0x0000fe0000000000" # Cores 41-47
+
+CPU_MASK="--cpu-bind=mask_cpu:${MASK_0},${MASK_1},${MASK_2},${MASK_3},${MASK_4},${MASK_5},${MASK_6},${MASK_7}"
 
 # # chatgpt-o1 suggested
 # Make Rendezvous kick in at 4 KiB
@@ -50,13 +62,19 @@ export MPICH_OFI_VERBOSE=1
 # # Keep hardware matching unless NIC resources become exhausted, then go hybrid
 # export FI_CXI_RX_MATCH_MODE=hybrid
 #export FI_EFA_USE_DEVICE_RDMA=1
+
 export FI_CXI_RDZV_THRESHOLD=0
 export FI_CXI_RDZV_GET_MIN=0
 export FI_CXI_RDZV_EAGER_SIZE=0 
-export MPICH_OFI_RMA_STARTUP_CONNECT=1
+#export MPICH_OFI_RMA_STARTUP_CONNECT=1
 
 # export FI_CXI_OFLOW_BUF_SIZE=1073741824
 # export FI_CXI_OFLOW_BUF_COUNT=1
+
+# export MPICH_SCATTERV_MIN_COMM_SIZE=1
+# export MPICH_SCATTERV_SHORT_MSG=0
+# export MPICH_GATHERV_MIN_COMM_SIZE=1
+# export MPICH_GATHERV_SHORT_MSG=0
 
 
 
@@ -80,11 +98,11 @@ SCRIPT="python -u benchmark_all_gather.py"
 #SCRIPT="python -u benchmark_reduce_scatter.py"
 #SCRIPT="python -u benchmark_all_to_all.py"
 
+#SCRIPT="python -u p2p/p2p_mpi.py --optimized"
 
-SCRIPT="p2p/p2p_mpi.py"
 export PYTHONPATH="$PYTHONPATH:."
-
-run_cmd="srun -N $NNODES -n $GPUS -c7 --gpus-per-task=1 --gpu-bind=closest $SCRIPT" 
+#export MPICH_OFI_CXI_COUNTER_REPORT=5
+run_cmd="srun -N $NNODES -n $GPUS --ntasks-per-node=8 -c 7 ${CPU_MASK} --mem-bind=map_mem:3,3,1,1,0,0,2,2  $SCRIPT" 
 echo $run_cmd 
 eval $run_cmd 
 
