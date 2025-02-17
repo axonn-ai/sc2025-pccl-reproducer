@@ -1,4 +1,4 @@
-from mpi_utils import create_2D_grid, _torch_to_mpi
+from uni_dist.process_groups import create_2D_grid, _torch_to_mpi
 import torch 
 import torch.distributed as dist
 import numpy as np

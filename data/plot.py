@@ -4,6 +4,7 @@ from setup_plot import setup_global, setup_local, get_colors, get_linestyles, se
 import pandas as pd
 import re
 import os
+import sys
 
 def parse_file():
     import re
@@ -32,7 +33,7 @@ def parse_to_dataframe(file_path):
             current_output_size = float(re.search(r"input size = ([\d.]+) MB", line).group(1))
         
         elif "Method =" in line:
-            method = re.search(r"Method = (\w+)", line).group(1).lower()
+            method = re.search(r"Method = ([\w-]+)", line).group(1).lower()
         
         elif "bus bw" in line:
             match = re.search(r"bus bw for (\d+) GPUs is ([\d.]+) GBPS for message output size ([\d.]+) MB", line)
@@ -74,70 +75,58 @@ def parse_all_files_in_folder(folder_path):
     combined_df = pd.concat(dataframes, ignore_index=True)
     return combined_df
 
+if __name__ == "__main__":
+    #impl = sys.argv[1]
+    machine = sys.argv[1]
+    buffer_size = int(sys.argv[2])
+    if machine == "frontier":
+        coll = "all_gather_2"
+    elif machine == "perlmutter":
+        coll = "pm_all_gather_2"
 
-collective="reduce_scatter_3"
-#collective="all_gather_2"
-combined_df = parse_all_files_in_folder(folder_path=f"{collective}/")
+    setup_global()
+    setup_local()
+    colors = get_colors()
+    linestyles = get_linestyles()
+    markers=get_markers()
+    combined_df = parse_all_files_in_folder(folder_path=f"{machine}/{coll}/")
+    key = "time_ms"
+    #key = "bus_bw_GBPS"    
 
+    for idx, impl in enumerate(["nccl", "hybrid", "mpi"]):
+        #collective="all_gather_2"
+        # Filter for the allowed buffer sizes
+        filtered_df = combined_df[combined_df["buffer_size_MB"] == buffer_size]
+        print(filtered_df)
+        df = filtered_df[filtered_df["method"] == impl]
+        if impl == "nccl" and machine == "frontier":
+            impl = "rccl"
+        buffer_sizes = sorted(filtered_df["buffer_size_MB"].unique())
+        i=0
+        for buffer_size in buffer_sizes:
+            subset = df[df["buffer_size_MB"] == buffer_size].sort_values(by="gpu_count")
+            #x_values = subset["gpu_count"].apply(lambda x: int(np.log2(x / 8)))  # log2 scale for 8, 16, 32, etc.
+            x_values = subset["gpu_count"]
+            
+            plt.plot(x_values, subset[key], label=f"{impl}-{buffer_size} MB", 
+                    linestyle=linestyles[idx], color=colors[idx], marker=markers[idx])
+        
+            i+=1
+        
+    # Add labels, title, and legend
+    plt.xlabel("GPU Count", fontsize=12)
+    if key == "bus_bw_GBPS":
+        plt.ylabel("Bus Bandwidth (GBPS)", fontsize=12)
+    elif key == "time_ms":
+        plt.ylabel("Time (ms)", fontsize=12)
 
-# Define the allowed buffer sizes
-allowed_buffer_sizes = [128, 256, 512]
-#allowed_buffer_sizes = [8, 16, 32]
+    #plt.title(f"Effect of (en/dis)abling eager for {impl} on Frontier", fontsize=14)
+    plt.title(f"Latencies for {coll} on {machine}", fontsize=14)
 
-# Filter for the allowed buffer sizes
-filtered_df = combined_df[combined_df["buffer_size_MB"].isin(allowed_buffer_sizes)]
-
-
-# Create separate DataFrames for each method
-nccl_df = filtered_df[filtered_df["method"] == "nccl"]
-mpi_df = filtered_df[filtered_df["method"] == "mpi"]
-hybrid_df = filtered_df[filtered_df["method"] == "hybrid"]
-
-# Optionally, print the shapes or preview each DataFrame
-print(f"NCCL DataFrame: {nccl_df.shape[0]} entries")
-print(f"MPI DataFrame: {mpi_df.shape[0]} entries")
-print(f"Hybrid DataFrame: {hybrid_df.shape[0]} entries")
-
-buffer_sizes = sorted(nccl_df["buffer_size_MB"].unique())
-
-# Plot each buffer size
-setup_global()
-setup_local()
-colors = get_colors()
-linestyles = get_linestyles()
-markers=get_markers()
-
-rccl_idx, hybrid_idx = 0, 1
-i=0
-key = "bus_bw_GBPS"
-for buffer_size in buffer_sizes:
-    subset = nccl_df[nccl_df["buffer_size_MB"] == buffer_size].sort_values(by="gpu_count")
-    x_values = subset["gpu_count"].apply(lambda x: int(np.log2(x / 8)))  # log2 scale for 8, 16, 32, etc.
-    plt.plot(x_values, subset[key], label=f"rccl-{buffer_size} MB", 
-             linestyle=linestyles[i], color=colors[rccl_idx], marker=markers[i])
-    
-    subset = hybrid_df[hybrid_df["buffer_size_MB"] == buffer_size].sort_values(by="gpu_count")
-    x_values = subset["gpu_count"].apply(lambda x: int(np.log2(x / 8)))  # log2 scale for 8, 16, 32, etc.
-    plt.plot(x_values, subset[key], label=f"hybrid-{buffer_size} MB", 
-             linestyle=linestyles[i], color=colors[hybrid_idx], marker=markers[i])
-    i+=1
-    
-
-
-
-
-plt.xticks([0, 1, 2, 3, 4, 5, 6, 7], [8, 16, 32, 64, 128, 256, 512, 1024], fontsize=12)
-#plt.xlim(0,3)
-# Add labels, title, and legend
-plt.xlabel("GPU Count", fontsize=12)
-if key == "bus_bw_GBPS":
-    plt.ylabel("Bus Bandwidth (GBPS)", fontsize=12)
-elif key == "time_ms":
-    plt.ylabel("Time (ms)", fontsize=12)
-
-plt.title(f"Bus Bandwidth vs GPU Count for {collective} on Frontier", fontsize=14)
-plt.legend(title="Message Size (MB)", fontsize=10)
-plt.ylim(0)
-set_aspect_ratio(3/5)
-plt.savefig(f"plot_{collective}.pdf", bbox_inches='tight')
+    plt.legend(title="Message Size (MB)", fontsize=10)
+    plt.ylim(0) # 100)
+    set_aspect_ratio(3/5)
+    if not os.path.isdir(f"plots/{machine}/{coll}/"):
+        os.makedirs(f"plots/{machine}/{coll}/")
+    plt.savefig(f"plots/{machine}/{coll}/plot_{buffer_size}_MB.pdf", bbox_inches='tight')
 

@@ -5,7 +5,7 @@
 
 PROJ_NAME="csc569"
 WRKSPC="/lustre/orion/$PROJ_NAME/scratch/$USER/moe"
-VENV_NAME="moe-venv"
+VENV_NAME="venv"
 
 module load cray-python/3.10.10
 source $WRKSPC/$VENV_NAME/bin/activate
@@ -59,6 +59,7 @@ export MPICH_OFI_RMA_STARTUP_CONNECT=1
 # export FI_CXI_OFLOW_BUF_COUNT=1
 
 
+
 # - Cray MPICH supports creating a full connection grid during MPI_Init.
 #         By default, OFI connections between ranks are set up on demand. This
 #         allows for optimal performance while minimizing memory requirements.
@@ -80,6 +81,8 @@ SCRIPT="python -u benchmark_all_gather.py"
 #SCRIPT="python -u benchmark_all_to_all.py"
 
 
+SCRIPT="p2p/p2p_mpi.py"
+export PYTHONPATH="$PYTHONPATH:."
 
 run_cmd="srun -N $NNODES -n $GPUS -c7 --gpus-per-task=1 --gpu-bind=closest $SCRIPT" 
 echo $run_cmd 

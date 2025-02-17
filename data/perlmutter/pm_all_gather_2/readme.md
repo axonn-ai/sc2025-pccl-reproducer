@@ -1,0 +1,1 @@
+with both nccl and mpi as the outer communication library

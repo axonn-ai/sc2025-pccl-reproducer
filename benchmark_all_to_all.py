@@ -3,7 +3,7 @@ import torch.distributed as dist
 import numpy as np
 import os
 from mpi4py import MPI
-from mpi_utils import _torch_to_mpi
+from uni_dist.process_groups import _torch_to_mpi
 import numpy as np
 
 @torch.no_grad()

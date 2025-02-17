@@ -3,7 +3,7 @@ import torch.nn as nn
 import torch.distributed as dist
 from all_gather import all_gather 
 from reduce_scatter import reduce_scatter
-from mpi_utils import create_2D_grid
+from uni_dist.process_groups import create_2D_grid
 from torch.autograd import Function
 import torch.nn.functional as F
 import os

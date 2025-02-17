@@ -1,0 +1,130 @@
+
+The following have been reloaded with a version change:
+  1) cudatoolkit/12.2 => cudatoolkit/12.4
+
+srun -C gpu -N 128 -n 512 -c 32 --cpu-bind=cores --gpus-per-node=4 ./get_rank.sh python -u benchmark_all_gather.py
+PE 0: MPICH CH4 OFI detected 4 NICs/node on host nid001564
+PE 0: MPICH CH4 OFI netmod using cxi provider (domain_name=cxi0, src_addr=0x4940)
+PE 0: Selected traffic class: [TC_BEST_EFFORT, 512]
+output size = 1 MB
+Method = nccl
+All-gather bus bw for 512 GPUs is 0.301 GBPS for message output size 1.049 MB
+time = 3.481 ms
+Method = mpi
+All-gather bus bw for 512 GPUs is 0.604 GBPS for message output size 1.049 MB
+time = 1.734 ms
+Method = hybrid
+All-gather bus bw for 512 GPUs is 0.785 GBPS for message output size 1.049 MB
+time = 1.332 ms
+===============================
+output size = 2 MB
+Method = nccl
+All-gather bus bw for 512 GPUs is 0.619 GBPS for message output size 2.097 MB
+time = 3.383 ms
+Method = mpi
+All-gather bus bw for 512 GPUs is 0.734 GBPS for message output size 2.097 MB
+time = 2.853 ms
+Method = hybrid
+All-gather bus bw for 512 GPUs is 1.570 GBPS for message output size 2.097 MB
+time = 1.333 ms
+===============================
+output size = 4 MB
+Method = nccl
+All-gather bus bw for 512 GPUs is 1.035 GBPS for message output size 4.194 MB
+time = 4.046 ms
+Method = mpi
+All-gather bus bw for 512 GPUs is 0.994 GBPS for message output size 4.194 MB
+time = 4.209 ms
+Method = hybrid
+All-gather bus bw for 512 GPUs is 2.993 GBPS for message output size 4.194 MB
+time = 1.399 ms
+===============================
+output size = 8 MB
+Method = nccl
+All-gather bus bw for 512 GPUs is 2.270 GBPS for message output size 8.389 MB
+time = 3.688 ms
+Method = mpi
+All-gather bus bw for 512 GPUs is 0.831 GBPS for message output size 8.389 MB
+time = 10.077 ms
+Method = hybrid
+All-gather bus bw for 512 GPUs is 2.771 GBPS for message output size 8.389 MB
+time = 3.022 ms
+===============================
+output size = 16 MB
+Method = nccl
+All-gather bus bw for 512 GPUs is 3.136 GBPS for message output size 16.777 MB
+time = 5.339 ms
+Method = mpi
+All-gather bus bw for 512 GPUs is 1.561 GBPS for message output size 16.777 MB
+time = 10.726 ms
+Method = hybrid
+All-gather bus bw for 512 GPUs is 5.104 GBPS for message output size 16.777 MB
+time = 3.281 ms
+===============================
+output size = 32 MB
+Method = nccl
+All-gather bus bw for 512 GPUs is 5.643 GBPS for message output size 33.554 MB
+time = 5.935 ms
+Method = mpi
+All-gather bus bw for 512 GPUs is 2.952 GBPS for message output size 33.554 MB
+time = 11.343 ms
+Method = hybrid
+All-gather bus bw for 512 GPUs is 9.067 GBPS for message output size 33.554 MB
+time = 3.693 ms
+===============================
+output size = 64 MB
+Method = nccl
+All-gather bus bw for 512 GPUs is 10.069 GBPS for message output size 67.109 MB
+time = 6.652 ms
+Method = mpi
+All-gather bus bw for 512 GPUs is 5.131 GBPS for message output size 67.109 MB
+time = 13.053 ms
+Method = hybrid
+All-gather bus bw for 512 GPUs is 14.577 GBPS for message output size 67.109 MB
+time = 4.595 ms
+===============================
+output size = 128 MB
+Method = nccl
+All-gather bus bw for 512 GPUs is 14.488 GBPS for message output size 134.218 MB
+time = 9.246 ms
+Method = mpi
+All-gather bus bw for 512 GPUs is 4.080 GBPS for message output size 134.218 MB
+time = 32.831 ms
+Method = hybrid
+All-gather bus bw for 512 GPUs is 23.559 GBPS for message output size 134.218 MB
+time = 5.686 ms
+===============================
+output size = 256 MB
+Method = nccl
+All-gather bus bw for 512 GPUs is 26.102 GBPS for message output size 268.435 MB
+time = 10.264 ms
+Method = mpi
+All-gather bus bw for 512 GPUs is 11.667 GBPS for message output size 268.435 MB
+time = 22.963 ms
+Method = hybrid
+All-gather bus bw for 512 GPUs is 27.239 GBPS for message output size 268.435 MB
+time = 9.836 ms
+===============================
+output size = 512 MB
+Method = nccl
+All-gather bus bw for 512 GPUs is 40.152 GBPS for message output size 536.871 MB
+time = 13.345 ms
+Method = mpi
+All-gather bus bw for 512 GPUs is 14.496 GBPS for message output size 536.871 MB
+time = 36.963 ms
+Method = hybrid
+All-gather bus bw for 512 GPUs is 29.909 GBPS for message output size 536.871 MB
+time = 17.915 ms
+===============================
+output size = 1024 MB
+Method = nccl
+All-gather bus bw for 512 GPUs is 52.977 GBPS for message output size 1073.742 MB
+time = 20.228 ms
+Method = mpi
+All-gather bus bw for 512 GPUs is 16.427 GBPS for message output size 1073.742 MB
+time = 65.237 ms
+Method = hybrid
+All-gather bus bw for 512 GPUs is 31.668 GBPS for message output size 1073.742 MB
+time = 33.840 ms
+===============================
+{'mpi': [np.float64(0.6035384763210724), np.float64(0.7336247247886875), np.float64(0.9944528773490131), np.float64(0.8308552534207412), np.float64(1.561129762859749), np.float64(2.9524222993136746), np.float64(5.1312025289345895), np.float64(4.0801349181479605), np.float64(11.666881235090937), np.float64(14.49626048616722), np.float64(16.42706881858251)], 'rccl': [np.float64(0.3006012225350437), np.float64(0.618629443880664), np.float64(1.0346494009473917), np.float64(2.270423263304992), np.float64(3.1361887459952595), np.float64(5.642880215890672), np.float64(10.069314136058148), np.float64(14.488496614471156), np.float64(26.10195805616016), np.float64(40.15240434234322), np.float64(52.977082632146434)], 'hybrid': [np.float64(0.78541563772225), np.float64(1.570242986286495), np.float64(2.9932613968426556), np.float64(2.7706596245613335), np.float64(5.103501024869908), np.float64(9.06719937345332), np.float64(14.577405732492409), np.float64(23.559015898246933), np.float64(27.23868571738424), np.float64(29.909468780119965), np.float64(31.66790308412589)]}

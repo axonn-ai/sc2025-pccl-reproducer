@@ -1,0 +1,7 @@
+__pycache__/
+data/__pycache__/
+data/gillsans.ttf
+p2p/opt.out
+p2p/unopt.out
+uni_dist/__pycache__/
+venv/

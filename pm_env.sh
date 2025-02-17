@@ -1,0 +1,34 @@
+export CUDA_DEVICE_MAX_CONNECTIONS=1
+export NCCL_NET_GDR_LEVEL=PHB
+export NCCL_CROSS_NIC=1
+export NCCL_SOCKET_IFNAME=hsn
+export NCCL_NET="AWS Libfabric"
+export MPICH_GPU_SUPPORT_ENABLED=1
+
+# disabling rendezvous mode
+export FI_CXI_RDZV_THRESHOLD=0
+export FI_CXI_RDZV_GET_MIN=0
+export FI_CXI_RDZV_EAGER_SIZE=0 
+
+# mapping GPUs to NICs and processes correctly
+export MPICH_OFI_NIC_POLICY="USER"
+export MPICH_OFI_NIC_MAPPING="0:3; 1:2; 2:1; 3:0"
+export CUDA_VISIBLE_DEVICES=3,2,1,0
+export CPU_MASK="--cpu-bind=cores"
+
+
+# make FI output useful information
+export MPICH_OFI_VERBOSE=1
+export MPICH_OFI_NIC_VERBOSE=1
+export MPICH_GPU_ALLREDUCE_USE_KERNEL=1
+
+
+# export NCCL_DEBUG=INFO 
+# export NCCL_DEBUG_SUBSYS="COLL,TUNING"
+# export MPICH_SMP_SINGLE_COPY_SIZE=65536
+# export MPICH_GPU_MANAGED_MEMORY_SUPPORT_ENABLED=1
+#export MPICH_SCATTERV_MIN_COMM_SIZE=1
+# export MPICH_SCATTERV_SHORT_MSG=0
+# export MPICH_GATHERV_MIN_COMM_SIZE=1
+# export MPICH_GATHERV_SHORT_MSG=0
+# `
