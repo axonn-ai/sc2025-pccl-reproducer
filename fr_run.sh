@@ -1,14 +1,20 @@
 #!/bin/bash
 #SBATCH -p batch
 #SBATCH -A CSC547
-#SBATCH -t 00:30:00
+#SBATCH -t 00:15:00
 
 PROJ_NAME="csc569"
-WRKSPC="/lustre/orion/$PROJ_NAME/scratch/$USER/moe"
-VENV_NAME="venv"
+WRKSPC="/lustre/orion/$PROJ_NAME/scratch/$USER/moe/communication"
+VENV_NAME="comm-venv"
 
+
+module load cray-mpich/8.1.31
+module load amd-mixed/6.2.4
+module load cpe/24.11
+module load craype-accel-amd-gfx90a
 module load cray-python/3.10.10
 source $WRKSPC/$VENV_NAME/bin/activate
+
 
 ## calculating the number of nodes and GPUs
 export NNODES=$SLURM_JOB_NUM_NODES
@@ -26,13 +32,16 @@ export WORLD_SIZE=$GPUS
 
 ## some RCCL env variables
 # export FI_CXI_ATS=0
-# export HSA_FORCE_FINE_GRAIN_PCIE=1
+export HSA_FORCE_FINE_GRAIN_PCIE=1
 export NCCL_CROSS_NIC=1
 export CUDA_DEVICE_MAX_CONNECTIONS=1
 export NCCL_NET_GDR_LEVEL="PHB"
 
 ## RCCL plugin
 export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:$WRKSPC/aws-ofi-rccl/lib"
+
+#:$CRAY_LD_LIBRARY_PATH:${MPICH_DIR}/lib:${CRAY_MPICH_ROOTDIR}/gtl/lib"
+
 
 # mpich gpu support
 export MPICH_GPU_SUPPORT_ENABLED=1
@@ -66,6 +75,7 @@ CPU_MASK="--cpu-bind=mask_cpu:${MASK_0},${MASK_1},${MASK_2},${MASK_3},${MASK_4},
 export FI_CXI_RDZV_THRESHOLD=0
 export FI_CXI_RDZV_GET_MIN=0
 export FI_CXI_RDZV_EAGER_SIZE=0 
+export MPICH_OFI_CXI_COUNTER_VERBOSE=1
 #export MPICH_OFI_RMA_STARTUP_CONNECT=1
 
 # export FI_CXI_OFLOW_BUF_SIZE=1073741824
@@ -77,14 +87,13 @@ export FI_CXI_RDZV_EAGER_SIZE=0
 # export MPICH_GATHERV_SHORT_MSG=0
 
 
-
 # - Cray MPICH supports creating a full connection grid during MPI_Init.
 #         By default, OFI connections between ranks are set up on demand. This
 #         allows for optimal performance while minimizing memory requirements.
 #         However, for jobs requiring an all-to-all communication pattern, it
 #         may be beneficial to create all OFI connections in a coordinated
 #         manner at startup. See the MPICH_OFI_STARTUP_CONNECT description in
-#         the mpi man page.
+#         the mpi man page0.
 
 #       - Cray MPICH supports runtime switching to the UCX netmod starting
 #         with version 8.0.14. To do this load the craype-network-ucx module
@@ -93,15 +102,26 @@ export FI_CXI_RDZV_EAGER_SIZE=0
 #         the intro_mpi man page with the Cray-MPICH-UCX module loaded.
 
 
+# export CUDA_VISIBLE_DEVICES="1,0,3,2,4,5,6,7"
+# CPU_MASK="--cpu-bind=mask_cpu:${MASK_1},${MASK_0},${MASK_3},${MASK_2},${MASK_4},${MASK_5},${MASK_6},${MASK_7}"
 
-SCRIPT="python -u benchmark_all_gather.py"
+export HSA_ENABLE_SDMA=0
+
+# export MPICH_GPU_IPC_THRESHOLD=0
+# export MPICH_GPU_IPC_ENABLED=1
+# export MPICH_GPU_IPC_ENABLED=CMA #XPMEM is the other option
+
+
+SCRIPT="python -u benchmark_all_gather.py --num-gpus-per-node 8 --machine frontier --method $1"
+#SCRIPT="python -u test_put.py"
 #SCRIPT="python -u benchmark_reduce_scatter.py"
 #SCRIPT="python -u benchmark_all_to_all.py"
 
 #SCRIPT="python -u p2p/p2p_mpi.py --optimized"
 
+
 export PYTHONPATH="$PYTHONPATH:."
-#export MPICH_OFI_CXI_COUNTER_REPORT=5
+export MPICH_OFI_CXI_COUNTER_REPORT=5
 run_cmd="srun -N $NNODES -n $GPUS --ntasks-per-node=8 -c 7 ${CPU_MASK} --mem-bind=map_mem:3,3,1,1,0,0,2,2  $SCRIPT" 
 echo $run_cmd 
 eval $run_cmd 

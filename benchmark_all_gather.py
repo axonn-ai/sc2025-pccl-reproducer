@@ -1,11 +1,19 @@
-from mpi4py import MPI
 import torch
 import torch.distributed as dist
+from mpi4py import MPI
+from test_put import _all_gather as all_gather_manual
 import numpy as np
 import os
 from uni_dist import ProcessGroups, all_gather_2D, _all_gather
 from utils import time_something, init, allclose
 from argparse import ArgumentParser
+import csv
+
+def get_gpu_counts_and_job_id():
+    # Get SLURM job details
+    gpu_count = int(os.getenv("SLURM_NTASKS", "1"))  # Default to 1 if not found
+    slurm_job_id = os.getenv("SLURM_JOB_ID", "unknown")
+    return gpu_count, slurm_job_id
 
 if __name__ == "__main__":
     init()
@@ -14,55 +22,66 @@ if __name__ == "__main__":
                         type=int, 
                         required=True, 
                         help="specify number of GPUs/GCDs per node")
+    parser.add_argument("--machine",
+                        type=str,
+                        required=True,
+                        help="specify the machine you are running on. Will be used to create folders")
+    parser.add_argument("--method",
+                        type=str, 
+                        choices=["mpi", "nccl", "mpi_mpi", "nccl_mpi", "mpi_nccl", "nccl_nccl"],
+                        required=True)
     args = parser.parse_args()
+    gpu_count, slurm_job_id = get_gpu_counts_and_job_id()
     sizes = np.array([1, 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024]) 
     unit = "MB"
 
-    hybrid_pgs = {}
-    for inner_pg in ["nccl", "mpi"]:
-        for outer_pg in ["mpi", "nccl"]:
-            hybrid_pg = ProcessGroups(args.num_gpus_per_node, 
-                                  dist.get_world_size() // args.num_gpus_per_node, 
-                                  inner_pg,
-                                  outer_pg)
-            hybrid_pgs[f'inner={inner_pg}_outer={outer_pg}'] = hybrid_pg
+    is_hybrid = '_' in args.method
+    if is_hybrid:
+        inner_pg, outer_pg = args.method.split("_")
+        pg = ProcessGroups(args.num_gpus_per_node, 
+                                   dist.get_world_size() // args.num_gpus_per_node, 
+                                   inner_pg,
+                                   outer_pg)
+        args.method = f"inner_{inner_pg}_outer_{outer_pg}"
+    elif args.method == "mpi":
+        pg = MPI.COMM_WORLD
+    else:
+        pg = None
+    part1, part2 = args.method, None
+    
+    data_folder = f"./data_10_runs/{args.machine}_1"
+    os.makedirs(data_folder, exist_ok=True)
 
-    for size in sizes:
-        if dist.get_rank() == 0:
-            print(f"output size = {size} {unit}")
-        mult = 2**20 if unit == "MB" else 2**10
-        output_buffer_numel = size * (mult) // 2 
-        input_buffer_numel = output_buffer_numel // dist.get_world_size()
+    csv_filename = os.path.join(data_folder,
+                                f"gpus_{gpu_count}_slurm_{slurm_job_id}.csv")
+    
+    with open(csv_filename, "w", newline="") as f:
+        writer = csv.writer(f)
+        # Write the header
+        header = ["gpu_count", "slurm_job_id", "output_size", "unit", f"time_{args.method}"]
+        #header.extend([f"time_hybrid_{group_type}" for group_type in hybrid_pgs.keys()])
+        writer.writerow(header)
 
-        output_tensor = torch.empty((output_buffer_numel,), dtype=torch.bfloat16, device="cuda")
-        input_tensor = torch.empty((input_buffer_numel,), dtype=torch.bfloat16, device="cuda")
+        for size in sizes:
+            if dist.get_rank() == 0:
+                print(f"output size = {size} {unit}")
+            mult = 2**20 if unit == "MB" else 2**10
+            output_buffer_numel = size * (mult) // 2 
+            input_buffer_numel = output_buffer_numel // dist.get_world_size()
 
-        # mpi 
-        time_mpi = time_something(_all_gather, output_tensor, input_tensor, group=MPI.COMM_WORLD)
+            output_tensor = torch.empty((output_buffer_numel,), dtype=torch.bfloat16, device="cuda")
+            input_tensor = torch.empty((input_buffer_numel,), dtype=torch.bfloat16, device="cuda")
 
-        # nccl
-        time_nccl = time_something(_all_gather, output_tensor, input_tensor, group=None)
+            function = _all_gather if not is_hybrid else all_gather_2D
 
-        output_tensor_gold = output_tensor.clone()
-        output_tensor.zero_()
+            time = time_something(function, output_tensor, input_tensor, group=pg)
+           
 
-        # hybrid times
-        hybrid_times = {}
-        for group_type, group in hybrid_pgs.items():
-            hybrid_times[group_type] = time_something(all_gather_2D, 
-                                                     output_tensor, 
-                                                     input_tensor, 
-                                                     group=group)
-            assert allclose(output_tensor, output_tensor_gold), f"Error in {group_type}"
+            if dist.get_rank() == 0:
+                print(f"time_{args.method} = {time:.2f} ms")                
 
-        if dist.get_rank() == 0:
-            print(f"time_mpi = {time_mpi:.2f} ms")
-            print(f"time_nccl = {time_nccl:.2f} ms")
-            for group_type, time in hybrid_times.items():
-                print(f"time_hybrid {group_type}= {time:.2f} ms")
-            
-
-        if dist.get_rank() == 0:
-            print("===============================")
+            if dist.get_rank() == 0:
+                print("===============================")
+                writer.writerow([gpu_count, slurm_job_id, size, unit, time])
         
     dist.destroy_process_group()

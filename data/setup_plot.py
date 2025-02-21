@@ -135,4 +135,4 @@ def get_linestyles_dict():
     return linestyle_dict
 
 def get_markers():
-    return ['^', 'd', 's', 'o', 'x']
+    return ['^', 'd', 's', 'o', 'x', '.']
