@@ -1,7 +1,7 @@
 #!/bin/bash
 #SBATCH -p batch
 #SBATCH -A CSC547
-#SBATCH -t 00:15:00
+#SBATCH -t 00:10:00
 
 PROJ_NAME="csc569"
 WRKSPC="/lustre/orion/$PROJ_NAME/scratch/$USER/moe/communication"

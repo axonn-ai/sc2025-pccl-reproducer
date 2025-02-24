@@ -133,8 +133,8 @@ def plot_bws_for_message_size(message_size):
                          str(int(txt)), ha='right', va='bottom', fontsize=9, color='black')
 
     plt.ylim(0)
-    plt.xlim(0)
-    #plt.xscale("log", base=2)
+    #plt.xlim(0)
+    plt.xscale("log", base=2)
     plt.xlabel("GPU Count")
     plt.ylabel("Bus Bw (GB/s)")
     plt.title(f"Bus Bw Performance for Message Size {message_size} MB")

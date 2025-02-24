@@ -2,7 +2,7 @@
 # Iterate over nodes in powers of 2 from 1 to 128
 # 1 2 4 8 16 
 
-for nodes in 64 128 256; do
+for nodes in 64 128; do
   echo "Submitting jobs with $nodes node(s)..."
   # Submit 10 jobs for each node count
   for run in {1..10}; do
