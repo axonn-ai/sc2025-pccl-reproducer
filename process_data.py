@@ -36,7 +36,7 @@ if False:
     # Save the result to a CSV file
     result.to_csv("mean_std_results.csv")
 else:
-    csv_files = glob.glob("./data_10_runs/frontier_1/*.csv")
+    csv_files = glob.glob("./data_10_runs/frontier_3/*.csv")
     # Dictionary to store separate DataFrames for each method
     method_dataframes = {}
 
@@ -77,9 +77,10 @@ else:
         print(f"Processed results saved for {method} in processed_{method}.csv.")
 
 print("Processing complete. Results saved in mean_std_results.csv.")
+exit()
 
 setup_global() 
-selected_methods = ["mpi", "nccl", "inner_nccl_outer_mpi", "inner_nccl_outer_nccl"]
+selected_methods = ["mpi", "nccl", "inner_nccl_outer_mpi", "inner_nccl_outer_nccl", "inner_mpi_outer_mpi"]
 selected_methods = ["time_" + x for x in selected_methods]
 
 def plot_times_for_message_size(message_size):

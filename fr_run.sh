@@ -76,6 +76,10 @@ export FI_CXI_RDZV_THRESHOLD=0
 export FI_CXI_RDZV_GET_MIN=0
 export FI_CXI_RDZV_EAGER_SIZE=0 
 export MPICH_OFI_CXI_COUNTER_VERBOSE=1
+
+export MPICH_GPU_ALLREDUCE_USE_KERNEL=1
+export MPICH_GPU_ALLREDUCE_BLK_SIZE=134217728
+export MPICH_GPU_ALLREDUCE_KERNEL_THRESHOLD=1
 #export MPICH_OFI_RMA_STARTUP_CONNECT=1
 
 # export FI_CXI_OFLOW_BUF_SIZE=1073741824
@@ -106,18 +110,18 @@ export MPICH_OFI_CXI_COUNTER_VERBOSE=1
 # CPU_MASK="--cpu-bind=mask_cpu:${MASK_1},${MASK_0},${MASK_3},${MASK_2},${MASK_4},${MASK_5},${MASK_6},${MASK_7}"
 
 export HSA_ENABLE_SDMA=0
+export MPICH_GPU_IPC_THRESHOLD=0
+export MPICH_GPU_IPC_ENABLED=1
 
-# export MPICH_GPU_IPC_THRESHOLD=0
-# export MPICH_GPU_IPC_ENABLED=1
 # export MPICH_GPU_IPC_ENABLED=CMA #XPMEM is the other option
 
 
 SCRIPT="python -u benchmark_all_gather.py --num-gpus-per-node 8 --machine frontier --method $1"
 #SCRIPT="python -u test_put.py"
-#SCRIPT="python -u benchmark_reduce_scatter.py"
+#SCRIPT="python -u benchmark_reduce_scatter.py --num-gpus-per-node 8 --machine frontier --method $1"
 #SCRIPT="python -u benchmark_all_to_all.py"
 
-#SCRIPT="python -u p2p/p2p_mpi.py --optimized"
+#SCRIPT="python -u test_put.py"
 
 
 export PYTHONPATH="$PYTHONPATH:."

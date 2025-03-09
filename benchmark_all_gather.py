@@ -1,7 +1,6 @@
 import torch
 import torch.distributed as dist
 from mpi4py import MPI
-from test_put import _all_gather as all_gather_manual
 import numpy as np
 import os
 from uni_dist import ProcessGroups, all_gather_2D, _all_gather
@@ -28,7 +27,7 @@ if __name__ == "__main__":
                         help="specify the machine you are running on. Will be used to create folders")
     parser.add_argument("--method",
                         type=str, 
-                        choices=["mpi", "nccl", "mpi_mpi", "nccl_mpi", "mpi_nccl", "nccl_nccl"],
+                        choices=["mpi", "nccl", "mpi_mpi", "nccl_mpi", "mpi_nccl", "nccl_nccl", "mpird", "nccl_mpird"],
                         required=True)
     args = parser.parse_args()
     gpu_count, slurm_job_id = get_gpu_counts_and_job_id()
@@ -36,20 +35,23 @@ if __name__ == "__main__":
     unit = "MB"
 
     is_hybrid = '_' in args.method
+    use_rd = "mpird" in args.method     
     if is_hybrid:
         inner_pg, outer_pg = args.method.split("_")
+        inner_pg_arg = inner_pg
+        outer_pg_arg = "mpi" if outer_pg == "mpird" else outer_pg
+
         pg = ProcessGroups(args.num_gpus_per_node, 
                                    dist.get_world_size() // args.num_gpus_per_node, 
-                                   inner_pg,
-                                   outer_pg)
+                                   inner_pg_arg,
+                                   outer_pg_arg)
         args.method = f"inner_{inner_pg}_outer_{outer_pg}"
-    elif args.method == "mpi":
+    elif args.method == "mpi" or args.method == "mpird":
         pg = MPI.COMM_WORLD
     else:
         pg = None
-    part1, part2 = args.method, None
     
-    data_folder = f"./data_10_runs/{args.machine}_1"
+    data_folder = f"./data_10_runs/{args.machine}_3"
     os.makedirs(data_folder, exist_ok=True)
 
     csv_filename = os.path.join(data_folder,
@@ -73,8 +75,7 @@ if __name__ == "__main__":
             input_tensor = torch.empty((input_buffer_numel,), dtype=torch.bfloat16, device="cuda")
 
             function = _all_gather if not is_hybrid else all_gather_2D
-
-            time = time_something(function, output_tensor, input_tensor, group=pg)
+            time = time_something(function, output_tensor, input_tensor, group=pg, use_rd=use_rd)
            
 
             if dist.get_rank() == 0:
