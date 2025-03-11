@@ -11,11 +11,99 @@ from .process_groups import ProcessGroups
 import numpy as np
 from .utils import _torch_to_mpi
 
+
+import torch
+import math
+from mpi4py import MPI
+from typing import Optional
+
+def recursive_halving_reduce_scatter_mpi(output_tensor: torch.Tensor,
+                                    input_tensor: torch.Tensor,
+                                    group: Optional[MPI.Comm] = None,
+                                    async_op: bool = False,
+                                    op=torch.add,):
+    """
+    Performs a reduce-scatter using arithmetic offsets.
+    
+    Each process starts with a 1D input_tensor of size (P * block_size),
+    which is viewed as P contiguous blocks in natural order. The goal is to reduce
+    (using op, e.g. torch.add) the j-th block (over all processes) so that at the end,
+    process j ends with the fully reduced block j.
+    
+    Instead of using bitwise XOR to pick partners (which naturally produces a bit-reversed
+    ordering), this algorithm uses arithmetic offsets:
+      - In round 1, each process exchanges with the partner at rank ± (p/2)
+      - In round 2, the offset is (p/4)
+      - etc.
+    
+    At each round the process splits its current buffer (which initially has p blocks)
+    into two equal halves. Then:
+      - If the process’s position within its current group is in the lower half, it keeps
+        the lower half (which should contain the blocks destined for lower-ranked processes)
+        and sends the upper half.
+      - Otherwise it keeps the upper half and sends the lower half.
+    
+    After log2(P) rounds, only one block remains—and it is naturally ordered (process i gets block i).
+    
+    Assumes that P (the number of processes) is a power of 2.
+    """
+    assert not async_op, "Non-blocking operations not supported"
+    comm = MPI.COMM_WORLD if group is None else group
+    rank = comm.Get_rank()
+    size = comm.Get_size()
+    
+    total_elems = input_tensor.numel()
+    assert total_elems % size == 0, "Input tensor size must be divisible by number of processes"
+    block_size = total_elems // size
+
+    # Reshape the input tensor into a 2D tensor of shape (P, block_size)
+    buf = input_tensor.view(size, block_size).clone()
+
+    # The algorithm runs for log2(size) rounds.
+    rounds = int(math.log2(size))
+    for r in range(rounds):
+        # At round r, we imagine that the current "group" size is: group_size = size / (2^r)
+        # and we split our current buffer (which has exactly group_size blocks) into two equal halves.
+        group_size = buf.size(0)  # This is the number of blocks we still hold.
+        half = group_size // 2
+
+        # To decide which half to keep, we use the process's global rank.
+        # In round 1 (group_size == size), a natural choice is:
+        #   - if rank < size/2: keep lower half; else keep upper half.
+        # In subsequent rounds, we use the remainder of rank modulo the current group size.
+        if (rank % (size // (2**r))) < (size // (2**(r+1))):
+            # Lower half: keep lower half, send upper half.
+            partner = (rank + half) % size
+            send_data = buf[half:].clone()
+            recv_buf = torch.empty((half, block_size), dtype=buf.dtype, device=buf.device)
+            torch.cuda.current_stream().synchronize()
+            comm.Sendrecv(sendbuf=send_data, dest=partner, sendtag=r,
+                          recvbuf=recv_buf, source=partner, recvtag=r)
+            # Combine the received upper half into our lower half.
+            buf[:half] = op(buf[:half], recv_buf)
+            # Discard the upper half.
+            buf = buf[:half]
+        else:
+            # Upper half: keep upper half, send lower half.
+            partner = (rank - half) % size
+            send_data = buf[:half].clone()
+            recv_buf = torch.empty((half, block_size), dtype=buf.dtype, device=buf.device)
+            torch.cuda.current_stream().synchronize()
+            comm.Sendrecv(sendbuf=send_data, dest=partner, sendtag=r,
+                          recvbuf=recv_buf, source=partner, recvtag=r)
+            # Combine the received lower half into our upper half.
+            buf[half:] = op(buf[half:], recv_buf)
+            buf = buf[half:]
+    # At the end, buf has exactly one block—the reduced result for the block this process is responsible for.
+    output_tensor.copy_(buf.view(-1))
+
+
+
 def ring_reduce_scatter_mpi(output_tensor: torch.Tensor,
-                        input_tensor: torch.Tensor,
-                        group: Optional[MPI.Comm] = None,
-                        async_op: bool = False, 
-                        op=torch.add):
+                            input_tensor: torch.Tensor,
+                            group: Optional[MPI.Comm] = None,
+                            async_op: bool = False, 
+                            op=torch.add):
     """
     Performs a ring-based reduce-scatter using torch tensors.
     
@@ -30,7 +118,7 @@ def ring_reduce_scatter_mpi(output_tensor: torch.Tensor,
       - Receives a block from its left neighbor.
       - Immediately reduces the received block into its local copy.
       
-    After the loop, the fully reduced block is at index (rank - (P-1)) % P.
+    After the loop, the fully reduced block is at index equal to the process’s rank.
     """
     assert not async_op, "non-blocking primitives not supported"
     comm = MPI.COMM_WORLD if group is None else group
@@ -41,8 +129,6 @@ def ring_reduce_scatter_mpi(output_tensor: torch.Tensor,
     assert output_tensor.dim() == 1, "output tensor should be 1D"
 
     sendbuf = input_tensor.view(size, -1)
-
-    # Ensure that there is one block per process.
     assert sendbuf.size(0) == size, "sendbuf must have one block per process"
     block_size = sendbuf.size(1)
     
@@ -52,16 +138,16 @@ def ring_reduce_scatter_mpi(output_tensor: torch.Tensor,
     
     # Perform size-1 steps of the ring reduce-scatter.
     for step in range(size - 1):
-        # Determine the block indices.
-        send_idx = (rank - step) % size
-        recv_idx = (rank - step - 1) % size
+        # Adjusted indices: subtract one extra so that the final index is the natural rank.
+        send_idx = (rank - step - 1) % size
+        recv_idx = (rank - step - 2) % size
         
         # Identify neighbors in the ring.
         dest = (rank + 1) % size
         source = (rank - 1 + size) % size
         
         # Copy the block to be sent.
-        send_data = buf[send_idx] #.clone()
+        send_data = buf[send_idx].clone()
         
         # Send the designated block to the right and receive a block from the left.
         torch.cuda.current_stream().synchronize()
@@ -71,9 +157,8 @@ def ring_reduce_scatter_mpi(output_tensor: torch.Tensor,
         # Reduce the received block into our local block.
         buf[recv_idx] = op(buf[recv_idx], tmp)
     
-    # The final, fully reduced block is at this index.
-    final_idx = (rank - (size - 1)) % size
-    output_tensor.copy_(buf[final_idx])
+    # Now, the fully reduced block is at index equal to rank.
+    output_tensor.copy_(buf[rank])
 
 
 def _reduce_scatter(
@@ -81,7 +166,8 @@ def _reduce_scatter(
     input_tensor: torch.Tensor,
     group: Optional[Union[dist.ProcessGroup, MPI.Comm]] = None,
     async_op: bool = False,
-    directly_call_mpi: bool = False
+    directly_call_mpi: bool = False,
+    use_rh: bool = False
 ) -> Optional[Request]:
 
     # Case 1: torch.distributed.ProcessGroup
@@ -95,7 +181,10 @@ def _reduce_scatter(
     elif isinstance(group, MPI.Comm):
         # make sure that the cpu is synchronized with the current stream
         if not directly_call_mpi:
-            request = ring_reduce_scatter_mpi(output_tensor, input_tensor, group, async_op)
+            if use_rh:
+                request = recursive_halving_reduce_scatter_mpi(output_tensor, input_tensor, group, async_op)
+            else:
+                request = ring_reduce_scatter_mpi(output_tensor, input_tensor, group, async_op)
         else:
             request = group.Reduce_scatter_block(input_tensor, output_tensor)
     else:
@@ -108,7 +197,8 @@ def _reduce_scatter(
 def reduce_scatter_2D(output_tensor: torch.Tensor,
     input_tensor: torch.Tensor,
     group: Optional[ProcessGroups] = None,
-    async_op: bool = False):
+    async_op: bool = False,
+    use_rh: bool = False):
 
     assert not async_op, "Non blocking version not implemented"
 
@@ -129,9 +219,12 @@ def reduce_scatter_2D(output_tensor: torch.Tensor,
     output_intermediate = torch.empty(input_permuted.size(0) // intra_node_group_size, 
                                       device=input_tensor.device, 
                                       dtype=input_tensor.dtype)
-    _reduce_scatter(output_intermediate, input_permuted, group.get_inner_group(), async_op=False)
+    _reduce_scatter(output_intermediate, input_permuted, group.get_inner_group(), async_op=False, use_rh=use_rh)
 
     # Step-2 inter-node 
-    _reduce_scatter(output_tensor, output_intermediate, group.get_outer_group(), async_op=False)
+    _reduce_scatter(output_tensor, output_intermediate, group.get_outer_group(), async_op=False, use_rh=use_rh)
+
+
+
 
 

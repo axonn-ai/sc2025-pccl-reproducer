@@ -36,7 +36,7 @@ if False:
     # Save the result to a CSV file
     result.to_csv("mean_std_results.csv")
 else:
-    csv_files = glob.glob("./data_10_runs/frontier_3/*.csv")
+    csv_files = glob.glob("./data_10_runs/frontier_2/*.csv")
     # Dictionary to store separate DataFrames for each method
     method_dataframes = {}
 

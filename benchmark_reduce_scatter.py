@@ -27,7 +27,7 @@ if __name__ == "__main__":
                         help="specify the machine you are running on. Will be used to create folders")
     parser.add_argument("--method",
                         type=str, 
-                        choices=["mpi", "nccl", "mpi_mpi", "nccl_mpi", "mpi_nccl", "nccl_nccl", "mpidirect"],
+                        choices=["mpi", "nccl", "mpi_mpi", "nccl_mpi", "mpi_nccl", "nccl_nccl", "mpidirect", "nccl_mpirh"],
                         required=True)
     args = parser.parse_args()
     gpu_count, slurm_job_id = get_gpu_counts_and_job_id()
@@ -35,12 +35,15 @@ if __name__ == "__main__":
     unit = "MB"
 
     is_hybrid = '_' in args.method
+    use_rh = "mpirh" in args.method
     if is_hybrid:
         inner_pg, outer_pg = args.method.split("_")
+        inner_pg_arg = inner_pg
+        outer_pg_arg = "mpi" if outer_pg == "mpirh" else outer_pg
         pg = ProcessGroups(args.num_gpus_per_node, 
                                    dist.get_world_size() // args.num_gpus_per_node, 
-                                   inner_pg,
-                                   outer_pg)
+                                   inner_pg_arg,
+                                   outer_pg_arg)
         args.method = f"inner_{inner_pg}_outer_{outer_pg}"
     elif args.method == "mpi" or args.method == "mpidirect":
         pg = MPI.COMM_WORLD
@@ -76,6 +79,9 @@ if __name__ == "__main__":
             kwargs = {}
             if args.method == "mpidirect":
                 kwargs["directly_call_mpi"] = True
+
+            if use_rh:
+                kwargs["use_rh"] = True
 
             time = time_something(function, output_tensor, input_tensor, group=pg, **kwargs)
            
