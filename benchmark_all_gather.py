@@ -66,6 +66,8 @@ if __name__ == "__main__":
                                    inner_pg_arg,
                                    outer_pg_arg)
         args.method = f"inner_{inner_pg}_outer_{outer_pg}"
+        if args.use_yacl:
+            args.method += "_yacl"
     elif args.method == "mpi" or args.method == "mpird":
         pg = MPI.COMM_WORLD
     else:
@@ -103,7 +105,7 @@ if __name__ == "__main__":
                 output_tensor_gold = torch.empty((output_buffer_numel,), dtype=torch.bfloat16, device="cuda")
 
             function = _all_gather if not is_hybrid else all_gather_2D
-            time = time_something(function, output_tensor, input_tensor, group=pg, use_rd=use_rd)
+            time = time_something(function, output_tensor, input_tensor, group=pg, use_rd=use_rd, use_yacl=args.use_yacl)
 
             if args.test:
                 _all_gather(output_tensor_gold, input_tensor)

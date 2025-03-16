@@ -15,7 +15,6 @@
 void recursiveDoublingAllGatherGPU(void* output, 
                                   const void* input, 
                                   int total_elems, 
-                                  void* buf,  // Same as output size
                                   void* recv_buf,  // Same as output size
                                   MPI_Comm comm) {
     

@@ -128,13 +128,13 @@ void all_gather_mpi(const torch::Tensor& output_tensor,
         // malloc's have high overheads and will slow your communication down
         // torch mallocs memory in advance and manages it internally.
         // therefore these calls are low overheads
-        auto tmp_wrkspace_tensor_1 = torch::empty_like(input_tensor);
-        auto tmp_wrkspace_tensor_2 = torch::empty_like(input_tensor);
+        auto tmp_wrkspace_tensor_1 = torch::empty_like(output_tensor);
+        //auto tmp_wrkspace_tensor_2 = torch::empty_like(input_tensor);
         recursiveDoublingAllGatherGPU(output_ptr, 
             input_ptr, 
             total_elems * dtype_size,
             tmp_wrkspace_tensor_1.data_ptr(),
-            tmp_wrkspace_tensor_2.data_ptr(),
+            //tmp_wrkspace_tensor_2.data_ptr(),
             comm);
     } else {
     TORCH_CHECK(false, "Unknown algorithm specified for all_gather_mpi: ", algorithm);
