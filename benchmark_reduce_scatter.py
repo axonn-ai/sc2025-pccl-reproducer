@@ -8,11 +8,17 @@ from utils import time_something, init, allclose
 from argparse import ArgumentParser
 import csv
 
+from uni_dist.build_kernels import build as build_yacl
+
+
 def get_gpu_counts_and_job_id():
     # Get SLURM job details
     gpu_count = int(os.getenv("SLURM_NTASKS", "1"))  # Default to 1 if not found
     slurm_job_id = os.getenv("SLURM_JOB_ID", "unknown")
     return gpu_count, slurm_job_id
+
+
+
 
 if __name__ == "__main__":
     init()
@@ -27,9 +33,31 @@ if __name__ == "__main__":
                         help="specify the machine you are running on. Will be used to create folders")
     parser.add_argument("--method",
                         type=str, 
-                        choices=["mpi", "nccl", "mpi_mpi", "nccl_mpi", "mpi_nccl", "nccl_nccl", "mpidirect", "nccl_mpirh"],
+                        choices=["mpi", 
+                                 "nccl", 
+                                 "mpi_mpi", 
+                                 "nccl_mpi", 
+                                 "mpi_nccl", 
+                                 "nccl_nccl", 
+                                 "mpidirect", 
+                                 "nccl_mpirh"],
                         required=True)
+    parser.add_argument("--use-yacl", 
+                        action="store_true",
+                        help="use the c++ backend for custom mpi ops")
+    parser.add_argument("--test", 
+                        action="store_true",
+                        help="test correctness against rccl")
+    
     args = parser.parse_args()
+    if args.use_yacl:
+        if dist.get_rank() == 0:
+            build_yacl()
+            MPI.COMM_WORLD.Barrier()
+        else:
+            MPI.COMM_WORLD.Barrier()
+            build_yacl()
+
     gpu_count, slurm_job_id = get_gpu_counts_and_job_id()
     sizes = np.array([1, 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024]) 
     unit = "MB"
@@ -45,13 +73,15 @@ if __name__ == "__main__":
                                    inner_pg_arg,
                                    outer_pg_arg)
         args.method = f"inner_{inner_pg}_outer_{outer_pg}"
+        if args.use_yacl:
+            args.method += "_yacl"
     elif args.method == "mpi" or args.method == "mpidirect":
         pg = MPI.COMM_WORLD
     else:
         pg = None
     part1, part2 = args.method, None
     
-    data_folder = f"./data_10_runs/{args.machine}_2"
+    data_folder = f"./data_10_runs/{args.machine}_yacl_rs"
     os.makedirs(data_folder, exist_ok=True)
 
     csv_filename = os.path.join(data_folder,
@@ -72,8 +102,9 @@ if __name__ == "__main__":
             output_buffer_numel = input_buffer_numel // dist.get_world_size()
 
             output_tensor = torch.empty((output_buffer_numel,), dtype=torch.float32, device="cuda")
-            input_tensor = torch.empty((input_buffer_numel,), dtype=torch.float32, device="cuda")
-
+            input_tensor = torch.randn((input_buffer_numel,), dtype=torch.float32, device="cuda")
+            
+            
             function = _reduce_scatter if not is_hybrid else reduce_scatter_2D
 
             kwargs = {}
@@ -83,8 +114,16 @@ if __name__ == "__main__":
             if use_rh:
                 kwargs["use_rh"] = True
 
+            kwargs["use_yacl"] = args.use_yacl
+
             time = time_something(function, output_tensor, input_tensor, group=pg, **kwargs)
            
+            #gold
+            if args.test:
+                output_tensor_gold = torch.empty((output_buffer_numel,), dtype=torch.float32, device="cuda")
+                _reduce_scatter(output_tensor_gold, input_tensor)
+                #print(output_tensor_gold[:5], output_tensor[:5])
+                assert allclose(output_tensor, output_tensor_gold)
 
             if dist.get_rank() == 0:
                 print(f"time_{args.method} = {time:.2f} ms")                
