@@ -58,14 +58,14 @@ void recursiveDoublingAllGatherGPU(void* output,
         HIP_CHECK(hipEventSynchronize(stream_sync_event));
         
         MPI_Sendrecv(static_cast<char*>(output) + send_offset, count, MPI_BYTE, partner, 0,
-                     recv_buf, count, MPI_BYTE, partner, 0,
+                     static_cast<char*>(output) + recv_offset, count, MPI_BYTE, partner, 0,
                      comm, MPI_STATUS_IGNORE);
         
-        HIP_CHECK(hipMemcpyAsync(static_cast<char*>(output) + recv_offset, 
-                                 recv_buf, 
-                                 count, 
-                                 hipMemcpyDeviceToDevice, 
-                                 hip_stream));
+        // HIP_CHECK(hipMemcpyAsync(static_cast<char*>(output) + recv_offset, 
+        //                          recv_buf, 
+        //                          count, 
+        //                          hipMemcpyDeviceToDevice, 
+        //                          hip_stream));
         
         seg_size *= 2;
     }
