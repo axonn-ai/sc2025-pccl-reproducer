@@ -1,11 +1,11 @@
-#include "all_gather.h"
-#include "utils.h"
-#include <torch/extension.h>
-#include <torch/torch.h>
-#include <hip/hip_runtime.h>
+// #include <torch/extension.h>
+// #include <torch/torch.h>
 #include <cassert>
 #include <cmath>
-#include <ATen/hip/HIPContext.h>
+
+#include "all_gather.h"
+#include "common.h"
+
 
 // Performs a recursive doubling all-gather on GPU tensors.
 //  - output: HIP device pointer where the final gathered tensor will be stored.
@@ -24,14 +24,19 @@ void recursiveDoublingAllGatherGPU(void* output,
 
     assert(total_elems % size == 0 && "Input tensor size must be divisible by number of processes");
     int block_size = total_elems / size;
-    auto hip_stream = at::hip::getCurrentHIPStream();
+
+    #if defined(USE_CUDA)
+    auto stream = at::cuda::getCurrentCUDAStream();
+    #elif defined(USE_ROCM)
+    auto stream = at::hip::getCurrentHIPStream();
+    #endif
 
     // Copy local input into its designated block in the output buffer.
     HIP_CHECK(hipMemcpyAsync(static_cast<char*>(output) + rank * block_size, 
                              input, 
                              block_size, 
                              hipMemcpyDeviceToDevice, 
-                             hip_stream));
+                             stream));
 
     hipEvent_t stream_sync_event;
     HIP_CHECK(hipEventCreateWithFlags(&stream_sync_event, hipEventDisableTiming));
@@ -53,7 +58,7 @@ void recursiveDoublingAllGatherGPU(void* output,
         int count = seg_size * block_size;
         
         // Record an event on the hip stream.
-        HIP_CHECK(hipEventRecord(stream_sync_event, hip_stream));
+        HIP_CHECK(hipEventRecord(stream_sync_event, stream));
         // Wait for the copy to complete.
         HIP_CHECK(hipEventSynchronize(stream_sync_event));
         
@@ -61,12 +66,8 @@ void recursiveDoublingAllGatherGPU(void* output,
                      static_cast<char*>(output) + recv_offset, count, MPI_BYTE, partner, 0,
                      comm, MPI_STATUS_IGNORE);
         
-        // HIP_CHECK(hipMemcpyAsync(static_cast<char*>(output) + recv_offset, 
-        //                          recv_buf, 
-        //                          count, 
-        //                          hipMemcpyDeviceToDevice, 
-        //                          hip_stream));
-        
         seg_size *= 2;
     }
+    
+    HIP_CHECK(hipEventDestroy(stream_sync_event));
 }

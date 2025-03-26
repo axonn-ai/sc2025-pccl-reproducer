@@ -73,7 +73,7 @@ if __name__ == "__main__":
     else:
         pg = None
     
-    data_folder = f"./data_10_runs/frontier_yacl_ag"
+    data_folder = f"./data_10_runs/{args.machine}_yacl_ag"
     os.makedirs(data_folder, exist_ok=True)
 
     csv_filename = os.path.join(data_folder,

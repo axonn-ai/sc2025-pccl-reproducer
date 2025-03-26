@@ -27,8 +27,11 @@ export WORLD_SIZE=$GPUS
 
 source ./pm_env.sh
 
-#SCRIPT="benchmark_all_gather.py --num-gpus-per-node $GPUS_PER_NODE"
-SCRIPT="python -u test_put.py"
+SCRIPT="python -u $1 --num-gpus-per-node $GPUS_PER_NODE --machine perlmutter --method $2 --use-yacl"
+
+# for JIT building
+export CXX=CC 
+export CC=cc
 
 export PYTHONPATH="$PYTHONPATH:."
 run_cmd="srun -C gpu -N $NNODES -n $GPUS -c 32 $CPU_MASK --gpus-per-node=4 ./get_rank.sh $SCRIPT"

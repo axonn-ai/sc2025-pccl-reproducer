@@ -1,11 +1,11 @@
-#include "reduce_scatter.h"
-#include "utils.h"
-#include <torch/extension.h>
-#include <torch/torch.h>
-#include <hip/hip_runtime.h>
+// #include <torch/extension.h>
+// #include <torch/torch.h>
 #include <cassert>
 #include <cmath>
-#include <ATen/hip/HIPContext.h>
+
+#include "reduce_scatter.h"
+#include "common.h"
+
 
 // Performs a recursive-halving reduce-scatter on GPU tensors.
 //  - output: HIP device pointer where the reduced block (of block_size elements) will be stored.
@@ -26,14 +26,18 @@ void recursiveHalvingReduceScatterGPU(float* output,
 
     assert(total_elems % size == 0 && "Input tensor size must be divisible by number of processes");
     int block_size = total_elems / size;
-    auto hip_stream = at::hip::getCurrentHIPStream();
+    #if defined(USE_CUDA)
+    auto stream = at::cuda::getCurrentCUDAStream();
+    #elif defined(USE_ROCM)
+    auto stream = at::hip::getCurrentHIPStream();
+    #endif
 
     // copy the input into buf
     HIP_CHECK(hipMemcpyAsync(buf, 
         input, 
         total_elems * sizeof(float), 
         hipMemcpyDeviceToDevice,
-        hip_stream));
+        stream));
 
     
     int max_count = (size / 2) * block_size;
@@ -60,7 +64,7 @@ void recursiveHalvingReduceScatterGPU(float* output,
             int partner = (rank + half) % size;
             float* send_ptr = curr_ptr + half * block_size;
             // Record an event on the hip stream.
-            HIP_CHECK(hipEventRecord(stream_sync_event, hip_stream));
+            HIP_CHECK(hipEventRecord(stream_sync_event, stream));
             // Wait for the copy to complete.
             HIP_CHECK(hipEventSynchronize(stream_sync_event));
 
@@ -68,21 +72,21 @@ void recursiveHalvingReduceScatterGPU(float* output,
                          recv_buf, count, MPI_FLOAT, partner, r,
                          comm, MPI_STATUS_IGNORE);
             // Reduce the received data into the lower half.
-            vectorAdd(curr_ptr, recv_buf, count, hip_stream);
+            vectorAdd(curr_ptr, recv_buf, count, stream);
             current_blocks = half;
         } else {
             // Upper half: keep the upper half and send the lower half.
             int partner = (rank - half + size) % size;
             float* send_ptr = curr_ptr;  // lower half to be sent.
             // Record an event on the hip stream.
-            HIP_CHECK(hipEventRecord(stream_sync_event, hip_stream));
+            HIP_CHECK(hipEventRecord(stream_sync_event, stream));
             // Wait for the copy to complete.
             HIP_CHECK(hipEventSynchronize(stream_sync_event));
             MPI_Sendrecv(send_ptr, count, MPI_FLOAT, partner, r,
                          recv_buf, count, MPI_FLOAT, partner, r,
                          comm, MPI_STATUS_IGNORE);
             float* kept_ptr = curr_ptr + half * block_size;
-            vectorAdd(kept_ptr, recv_buf, count, hip_stream);
+            vectorAdd(kept_ptr, recv_buf, count, stream);
             curr_ptr = kept_ptr;
             current_blocks = half;
         }
@@ -93,7 +97,7 @@ void recursiveHalvingReduceScatterGPU(float* output,
         curr_ptr, 
         block_size * sizeof(float), 
         hipMemcpyDeviceToDevice, 
-        hip_stream));
+        stream));
 
     HIP_CHECK(hipEventDestroy(stream_sync_event));
 }
@@ -113,14 +117,18 @@ void ringReduceScatterGPU(float* output,
     assert(total_elems % size == 0 && "Input tensor size must be divisible by number of processes");
     int block_size = total_elems / size;
 
-    auto hip_stream = at::hip::getCurrentHIPStream();
+    #if defined(USE_CUDA)
+    auto stream = at::cuda::getCurrentCUDAStream();
+    #elif defined(USE_ROCM)
+    auto stream = at::hip::getCurrentHIPStream();
+    #endif
     hipEvent_t stream_sync_event;
     
     HIP_CHECK(hipMemcpyAsync(d_buf, 
         input, 
         total_elems * sizeof(float), 
         hipMemcpyDeviceToDevice,
-        hip_stream));
+        stream));
 
     HIP_CHECK(hipEventCreateWithFlags(&stream_sync_event, hipEventDisableTiming));
 
@@ -132,7 +140,7 @@ void ringReduceScatterGPU(float* output,
         int source   = (rank - 1 + size) % size;
 
         // Record an event on the hip stream.
-        HIP_CHECK(hipEventRecord(stream_sync_event, hip_stream));
+        HIP_CHECK(hipEventRecord(stream_sync_event, stream));
         // Wait for the copy to complete.
         HIP_CHECK(hipEventSynchronize(stream_sync_event));
 
@@ -142,14 +150,14 @@ void ringReduceScatterGPU(float* output,
                     comm, MPI_STATUS_IGNORE);
 
         // Reduce the received block into the block at recv_idx.
-        vectorAdd(d_buf + recv_idx * block_size, d_tmp, block_size, hip_stream);
+        vectorAdd(d_buf + recv_idx * block_size, d_tmp, block_size, stream);
     }
      
     HIP_CHECK(hipMemcpyAsync(output, 
         d_buf + rank * block_size, 
         block_size * sizeof(float), 
         hipMemcpyDeviceToDevice,
-        hip_stream));
+        stream));
 
     HIP_CHECK(hipEventDestroy(stream_sync_event));
 }
