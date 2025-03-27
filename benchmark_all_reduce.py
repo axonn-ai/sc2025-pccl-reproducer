@@ -3,12 +3,12 @@ import torch.distributed as dist
 from mpi4py import MPI
 import numpy as np
 import os
-from uni_dist import ProcessGroups, reduce_scatter_2D, _reduce_scatter
+from uni_dist import ProcessGroups, all_reduce_2D, _all_reduce
 from utils import time_something, init, allclose
 from argparse import ArgumentParser
 import csv
 
-from uni_dist.build_kernels import build as build_pccl
+from uni_dist.build_kernels import build as build_yacl
 
 
 def get_gpu_counts_and_job_id():
@@ -16,7 +16,6 @@ def get_gpu_counts_and_job_id():
     gpu_count = int(os.getenv("SLURM_NTASKS", "1"))  # Default to 1 if not found
     slurm_job_id = os.getenv("SLURM_JOB_ID", "unknown")
     return gpu_count, slurm_job_id
-
 
 
 
@@ -42,7 +41,7 @@ if __name__ == "__main__":
                                  "mpidirect", 
                                  "nccl_mpirh"],
                         required=True)
-    parser.add_argument("--use-pccl-cpp-backend", 
+    parser.add_argument("--use-yacl", 
                         action="store_true",
                         help="use the c++ backend for custom mpi ops")
     parser.add_argument("--test", 
@@ -50,13 +49,13 @@ if __name__ == "__main__":
                         help="test correctness against rccl")
     
     args = parser.parse_args()
-    if args.use_pccl_cpp_backend:
+    if args.use_yacl:
         if dist.get_rank() == 0:
-            build_pccl()
+            build_yacl()
             MPI.COMM_WORLD.Barrier()
         else:
             MPI.COMM_WORLD.Barrier()
-            build_pccl()
+            build_yacl()
 
     gpu_count, slurm_job_id = get_gpu_counts_and_job_id()
     sizes = np.array([1, 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024]) 
@@ -73,7 +72,7 @@ if __name__ == "__main__":
                                    inner_pg_arg,
                                    outer_pg_arg)
         args.method = f"inner_{inner_pg}_outer_{outer_pg}"
-        if args.use_pccl_cpp_backend:
+        if args.use_yacl:
             args.method += "_yacl"
     elif args.method == "mpi" or args.method == "mpidirect":
         pg = MPI.COMM_WORLD
@@ -114,7 +113,7 @@ if __name__ == "__main__":
             if use_rh:
                 kwargs["use_rh"] = True
 
-            kwargs["use_pccl_cpp_backend"] = args.use_pccl_cpp_backend
+            kwargs["use_yacl"] = args.use_yacl
 
             time = time_something(function, output_tensor, input_tensor, group=pg, **kwargs)
            

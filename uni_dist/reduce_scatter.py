@@ -168,7 +168,7 @@ def _reduce_scatter(
     async_op: bool = False,
     directly_call_mpi: bool = False,
     use_rh: bool = False,
-    use_yacl: bool = False,
+    use_pccl_cpp_backend: bool = False,
 ) -> Optional[Request]:
 
     # Case 1: torch.distributed.ProcessGroup
@@ -181,9 +181,9 @@ def _reduce_scatter(
     # Case 2: mpi4py.MPI.Comm
     elif isinstance(group, MPI.Comm):
         # make sure that the cpu is synchronized with the current stream
-        if use_yacl:
-                import yacl
-                request = yacl.reduce_scatter_mpi(output_tensor, 
+        if use_pccl_cpp_backend:
+                import pccl as pccl_cpp
+                request = pccl_cpp.reduce_scatter_mpi(output_tensor, 
                                               input_tensor, 
                                               group,
                                             "recursive" if use_rh else "ring")
@@ -207,7 +207,7 @@ def reduce_scatter_2D(output_tensor: torch.Tensor,
     group: Optional[ProcessGroups] = None,
     async_op: bool = False,
     use_rh: bool = False,
-    use_yacl: bool = False):
+    use_pccl_cpp_backend: bool = False):
 
     assert not async_op, "Non blocking version not implemented"
 
@@ -229,10 +229,10 @@ def reduce_scatter_2D(output_tensor: torch.Tensor,
     output_intermediate = torch.empty(input_permuted.size(0) // intra_node_group_size, 
                                       device=input_tensor.device, 
                                       dtype=input_tensor.dtype)
-    _reduce_scatter(output_intermediate, input_permuted, group.get_inner_group(), async_op=False, use_rh=use_rh, use_yacl=use_yacl)
+    _reduce_scatter(output_intermediate, input_permuted, group.get_inner_group(), async_op=False, use_rh=use_rh, use_pccl_cpp_backend=use_pccl_cpp_backend)
 
     # Step-2 inter-node 
-    _reduce_scatter(output_tensor, output_intermediate, group.get_outer_group(), async_op=False, use_rh=use_rh, use_yacl=use_yacl)
+    _reduce_scatter(output_tensor, output_intermediate, group.get_outer_group(), async_op=False, use_rh=use_rh, use_pccl_cpp_backend=use_pccl_cpp_backend)
 
 
 

@@ -7,7 +7,7 @@ from uni_dist import ProcessGroups, all_gather_2D, _all_gather
 from utils import time_something, init, allclose
 from argparse import ArgumentParser
 import csv
-from uni_dist.build_kernels import build as build_yacl
+from uni_dist.build_kernels import build as build_pccl
 
 
 def get_gpu_counts_and_job_id():
@@ -31,7 +31,7 @@ if __name__ == "__main__":
                         type=str, 
                         choices=["mpi", "nccl", "mpi_mpi", "nccl_mpi", "mpi_nccl", "nccl_nccl", "mpird", "nccl_mpird"],
                         required=True)
-    parser.add_argument("--use-yacl", 
+    parser.add_argument("--use-pccl-cpp-backend", 
                         action="store_true",
                         help="use the c++ backend for custom mpi ops")
     parser.add_argument("--test", 
@@ -42,13 +42,13 @@ if __name__ == "__main__":
                         choices=["bf16", "fp32"],
                         default="bf16")
     args = parser.parse_args()
-    if args.use_yacl:
+    if args.use_pccl_cpp_backend:
         if dist.get_rank() == 0:
-            build_yacl()
+            build_pccl()
             MPI.COMM_WORLD.Barrier()
         else:
             MPI.COMM_WORLD.Barrier()
-            build_yacl()
+            build_pccl()
 
     gpu_count, slurm_job_id = get_gpu_counts_and_job_id()
     sizes = np.array([1, 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024]) 
@@ -66,8 +66,8 @@ if __name__ == "__main__":
                                    inner_pg_arg,
                                    outer_pg_arg)
         args.method = f"inner_{inner_pg}_outer_{outer_pg}"
-        if args.use_yacl:
-            args.method += "_yacl"
+        if args.use_pccl_cpp_backend:
+            args.method += "_pccl"
     elif args.method == "mpi" or args.method == "mpird":
         pg = MPI.COMM_WORLD
     else:
@@ -105,7 +105,7 @@ if __name__ == "__main__":
                 output_tensor_gold = torch.empty((output_buffer_numel,), dtype=torch.bfloat16, device="cuda")
 
             function = _all_gather if not is_hybrid else all_gather_2D
-            time = time_something(function, output_tensor, input_tensor, group=pg, use_rd=use_rd, use_yacl=args.use_yacl)
+            time = time_something(function, output_tensor, input_tensor, group=pg, use_rd=use_rd, use_pccl_cpp_backend=args.use_pccl_cpp_backend)
 
             if args.test:
                 _all_gather(output_tensor_gold, input_tensor)

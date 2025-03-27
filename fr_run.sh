@@ -14,6 +14,9 @@ module load craype-accel-amd-gfx90a
 module load cray-python/3.10.10
 module load craype-accel-amd-gfx90a
 module load rocm
+module load ninja
+export CXX=CC 
+export CC=cc
 
 source $WRKSPC/$VENV_NAME/bin/activate
 
@@ -60,14 +63,12 @@ MASK_7="0x0000fe0000000000" # Cores 41-47
 CPU_MASK="--cpu-bind=mask_cpu:${MASK_0},${MASK_1},${MASK_2},${MASK_3},${MASK_4},${MASK_5},${MASK_6},${MASK_7}"
 
 
-SCRIPT="python -u benchmark_all_gather.py --num-gpus-per-node 8 --machine frontier --method $1 --use-yacl"
+SCRIPT="python -u benchmark_all_gather.py --num-gpus-per-node 8 --machine frontier --method $1 --use-pccl-cpp-backend --test"
 
 
 export PYTHONPATH="$PYTHONPATH:."
 
-module load ninja
-export CXX=CC 
-export CC=cc
+
 run_cmd="srun -N $NNODES -n $GPUS --ntasks-per-node=8 -c 7 ${CPU_MASK} --mem-bind=map_mem:3,3,1,1,0,0,2,2  bash -c 'ulimit -c 0; exec $SCRIPT'"
 echo $run_cmd 
 eval $run_cmd 

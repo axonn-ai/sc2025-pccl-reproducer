@@ -82,24 +82,20 @@ def build():
 
     if torch.version.hip is not None:
          extra_cuda_flags = ['-D__HIP_NO_HALF_OPERATORS__=1',
-                            '-D__HIP_NO_HALF_CONVERSIONS__=1'
                             '-D__HIP_ROCclr__', 
-                            '-D__HIP_ARCH_GFX90A__=1',
-                            '-DUSE_ROCM', 
-                            '-DUSE_MPI', 
+                            '-D__HIP_ARCH_GFX90A__=1', 
                             '-x hip',
                             ]
          extra_link_flags = ['-lamdhip64', 
-                             '-lrocblas',
                              '-L/opt/rocm-6.2.4/lib']
+         extra_c_flags = []
     else:
          extra_cuda_flags = ['-U__CUDA_NO_HALF_OPERATORS__',
                             '-U__CUDA_NO_HALF_CONVERSIONS__',
                             '--expt-relaxed-constexpr',
                             '--expt-extended-lambda',
-                            '-DUSE_CUDA'
                             ]
-         extra_c_flags = ['-DUSE_CUDA']
+         extra_c_flags = []
          extra_link_flags = []
 
     extra_c_flags += ['-O3', '-std=c++17', "-I"+mpi4py.get_include()] 
@@ -110,8 +106,8 @@ def build():
 
    
 
-    yacl = _cpp_extention_load_helper(
-        "yacl",
+    pccl = _cpp_extention_load_helper(
+        "pccl",
         sources, 
         extra_c_flags,
         extra_cuda_flags, 

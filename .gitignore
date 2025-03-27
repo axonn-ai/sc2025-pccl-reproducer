@@ -5,3 +5,10 @@ p2p/opt.out
 p2p/unopt.out
 uni_dist/__pycache__/
 venv/
+gillsans.ttf
+comm-venv/
+data/
+aws-ofi-rccl.tar.gz
+aws-ofi-rccl/
+data_10_runs/
+uni_dist/build/
