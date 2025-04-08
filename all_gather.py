@@ -101,7 +101,7 @@ def _all_gather(
     group: Optional[Union[dist.ProcessGroup, MPI.Comm]] = None,
     async_op: bool = False,
     use_rd: bool = False,
-    use_yacl: bool = False
+    use_pccl_cpp_backend: bool = False
 ) -> Optional[Request]:
 
     # Case 1: torch.distributed.ProcessGroup
@@ -112,9 +112,9 @@ def _all_gather(
     elif isinstance(group, MPI.Comm):
         # make sure that the cpu is synchronized with the current stream
         if use_rd:
-            if use_yacl:
-                import yacl
-                request = yacl.all_gather_mpi(output_tensor, 
+            if use_pccl_cpp_backend:
+                import pccl as pccl_cpp
+                request = pccl_cpp.all_gather_mpi(output_tensor, 
                                               input_tensor, 
                                               group,
                                             "recursive")
@@ -138,7 +138,7 @@ def all_gather_2D(output_tensor: torch.Tensor,
     group: Optional[ProcessGroups] = None,
     async_op: bool = False,
     use_rd: bool=False,
-    use_yacl: bool = False):
+    use_pccl_cpp_backend: bool = False):
 
     assert not async_op, "Non blocking version not implemented"
 
@@ -150,17 +150,12 @@ def all_gather_2D(output_tensor: torch.Tensor,
     output_intermediate = torch.empty(input_tensor.size(0) * inter_node_group_size, 
                                       device=input_tensor.device, 
                                       dtype=input_tensor.dtype)
-    _all_gather(output_intermediate, input_tensor, group.get_outer_group(), async_op=False, use_rd=use_rd, use_yacl=use_yacl)
+    _all_gather(output_intermediate, input_tensor, group.get_outer_group(), async_op=False, use_rd=use_rd, use_pccl_cpp_backend=use_pccl_cpp_backend)
 
     # Step-2 intra-node all-gather
-    _all_gather(output_tensor, output_intermediate, group.get_inner_group(), async_op=False, use_rd=use_rd, use_yacl=use_yacl)
+    _all_gather(output_tensor, output_intermediate, group.get_inner_group(), async_op=False, use_rd=use_rd, use_pccl_cpp_backend=use_pccl_cpp_backend)
 
-    # Step-3 on device permutation
-    output_splits = torch.split(output_tensor, split_size_or_sections=input_tensor.size(0)) 
-    ordered_tensors = []
-    for i in range(inter_node_group_size):
-        idxes = list(np.arange(i, intra_node_group_size*inter_node_group_size, inter_node_group_size ))
-        ordered_tensors.extend([output_splits[idx] for idx in idxes])
-    output_tensor.copy_(torch.cat(ordered_tensors))
+    output_unpermuted = output_tensor.view(intra_node_group_size, inter_node_group_size, -1).transpose(0, 1).reshape(-1)
+    output_tensor.copy_(output_unpermuted)
 
 

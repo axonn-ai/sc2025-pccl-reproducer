@@ -33,7 +33,7 @@ def patched_all_gather(self, output_tensor, input_tensor, group=None, async_op=F
             group = get_heir_pg(),
             async_op = False,
             use_rd = True,
-            use_yacl = True)
+            use_pccl_cpp_backend = True)
         if async_op:
             return dummy_request()
     else:
@@ -52,7 +52,7 @@ def patched_reduce_scatter(self,
                             group = get_heir_pg(),
                             async_op = False,
                             use_rh = True,
-                            use_yacl = True)
+                            use_pccl_cpp_backend = True)
         if async_op:
             return dummy_request()
     else:
@@ -83,6 +83,14 @@ def patched_broadcast(self, tensor, src, group=None, async_op=False):
     else:
         return self.old_broadcast(tensor, src, group, async_op)
 
+def patched_barrier(self, group=torch.distributed.GroupMember.WORLD, async_op=False, device_ids=None):
+    if is_global_pg(group):
+        torch.cuda.synchronize()
+        MPI.COMM_WORLD.Barrier()
+        if async_op:
+            return dummy_request()
+    else:
+        return self.old_barrier(group, async_op, device_ids)
 
 def patch_deepspeed(intra_node_pg_size):
     assert dist.is_initialized()
@@ -105,12 +113,17 @@ def patch_deepspeed(intra_node_pg_size):
     TorchBackend.old_reduce_scatter_tensor = TorchBackend.reduce_scatter_tensor
     TorchBackend.reduce_scatter_tensor = patched_reduce_scatter
 
+    #all-reduce
     TorchBackend.old_all_reduce = TorchBackend.all_reduce 
     TorchBackend.all_reduce = patched_all_reduce
 
+    #broadcast
     TorchBackend.old_broadcast = TorchBackend.broadcast 
     TorchBackend.broadcast = patched_broadcast
 
+    #barrier
+    TorchBackend.old_barrier = TorchBackend.barrier
+    TorchBackend.barrier = patched_barrier
 
 
 
