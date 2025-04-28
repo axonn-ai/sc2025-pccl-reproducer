@@ -1,7 +1,7 @@
 #!/bin/bash
 
 ## REPLACE WITH YOUR OLCF PROJECT NAME 
-PROJ_NAME="csc569"
+PROJ_NAME="csc547"
 rocm_version="6.2.4"
 export ROCM_PATH="/opt/rocm-${rocm_version}/"
 
