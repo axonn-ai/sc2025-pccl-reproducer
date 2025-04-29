@@ -2,7 +2,7 @@
 
 ### Preparing the environment
 The following will create a python virtual environment with all the required dependencies. It will also build the aws-ofi-plugin. The only thing you need 
-to change in the script is the PROJ_NAME on line 4.
+to change in the script is the `PROJ_NAME` variable on line 4.
 ```bash
 bash scripts/frontier/create_python_env.sh
 ```
