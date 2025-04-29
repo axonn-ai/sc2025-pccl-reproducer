@@ -25,9 +25,9 @@ To switch from all_gather to another collective (e.g., reduce_scatter), change t
 benchmark_raw_collectives/all_gather.py → benchmark_raw_collectives/reduce_scatter.py
 ```
 
-Use the --library flag to choose the communication backend - pccl, rccl, mpi
+Use the `--library` flag to choose the communication backend - `pccl`, `rccl`, `mpi`
 
-Add the --test flag to validate correctness of PCCL operations.
+Add the `--test` flag to validate correctness of PCCL operations.
 ⚠️ Note: This flag is not recommended for large-scale runs as it introduces performance overhead.
 
-Add the --pccl-recursive-alg flag to switch from the default ring algorithm to recursive doubling/halving, which is typically faster at scale.
+Add the `--pccl-recursive-alg` flag to switch from the default ring algorithm to recursive doubling/halving, which is typically faster at scale.
