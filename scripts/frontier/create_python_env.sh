@@ -42,7 +42,6 @@ elif [ "${rocm_version}" == 6.2.4  ]; then
 fi
 
 # other pip dependencies
-pip install --no-cache-dir  torch torchvision
 pip install --no-cache-dir  deepspeed
 pip install --no-cache-dir  transformers datasets tiktoken wandb tqdm
 
